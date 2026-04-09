@@ -12,4 +12,4 @@ The goal is to improve fuel usage efficiency by providing transparent informatio
 ## Getting Started
 1. Clone the repository:
    ```bash
-   git clone https://github.com/m15dev/fuel-community.git
+   git clone https://github.com/m15dev/fuel-share
