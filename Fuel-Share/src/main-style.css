@@ -70,6 +70,32 @@ html, body {
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
 }
+.logo-animation{
+    display: inline-block;
+
+    animation: brilho-laranja 2s infinite alternate ease-in-out;
+}
+@keyframes brilho-laranja {
+    0% {
+        color: var(--text-accent);
+        text-shadow: 0 0 0px rgba(240, 118, 47, 0);
+        transform: scale(1); 
+    }
+    50% {
+        color: rgb(255, 143, 78); 
+    }
+    100% {
+        color: var(--text-accent);
+        text-shadow: 0 0 12px rgba(240, 118, 47, 0.8), 
+                     0 0 20px rgba(240, 118, 47, 0.4);
+        transform: scale(1.02); 
+    }
+}
+
+
+/* ==========================================================================
+   Conteudo principal paginas
+   ========================================================================== */
 
 .main-content {
     flex: 1;
@@ -80,12 +106,17 @@ html, body {
     min-height: 0;
     -webkit-overflow-scrolling: touch;
 
-    padding: 20px 20px 80px 20px;
+    padding: 20px 20px 140px 20px; 
 }
 
-
-/* Rodapé / Barra de Botões */
 .nav-bottom {
+    position: fixed;   
+    bottom: 0;         
+    left: 50%;         
+    transform: translateX(-50%); 
+    width: 100%;
+    max-width: 430px; 
+
     padding: 12px 20px 20px;
     display: flex;
     align-items: center;
@@ -93,8 +124,7 @@ html, body {
     background: var(--bg);
     color: var(--text-light);
     border-top: 1px solid var(--border); 
-    flex-shrink: 0;
-    margin-top: auto;
+    z-index: 9999;     
 }
 /* ==========================================================================
    Outras Configurações...
@@ -102,7 +132,7 @@ html, body {
 
 h1 {
     font-family: monospace;
-    color: var(--text-accent);
+    color: var(--text-light);
 }
 h3 {
     font-family: monospace;
