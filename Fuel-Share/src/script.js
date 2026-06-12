@@ -16,3 +16,9 @@ if (horaAtual >= 5 && horaAtual < 12) {
     saudacao = "Boa noite";
 }
 document.getElementById("saudacao").textContent = saudacao;
+
+
+//-----------------------------------------------------
+
+const cidadeUsuario = "Pouso Alegre"; // Cidade do usuário, Pouso Alegre por enquanto
+document.getElementById("cidade").textContent = cidadeUsuario; //altera o texto
