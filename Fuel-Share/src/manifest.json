@@ -1,0 +1,15 @@
+{
+  "name": "Fuel Share",
+  "short_name": "FuelShare",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "purple",
+  "theme_color": "purple",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2928/2928883.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+
+
+/* ==========================================================================
+    Referências de cores usadas no site 
+   ========================================================================== */
+:root {
+    --bg: #0a0a0a;
+    --border: #1a1a1a;
+    --text-accent: rgb(240, 118, 47);
+    --text-light: aliceblue;
+}
+body.light-mode {
+    --bg: #f5f5fa;                    
+    --border: #e0e0e6;                
+    --text-accent: rgb(210, 88, 17);  
+    --text-light: #1a1a1a;        
+}
+
+/* ==========================================================================
+   Configurações para o navegador não quebrar o site
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;    
+    user-select: none;
+    touch-action: manipulation;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg);
+    overscroll-behavior: none; 
+    position: fixed;
+}
+.main-content::-webkit-scrollbar {
+    display: none; 
+}
+
+/* ==========================================================================
+   Parte que define o tamanho da div principal para adpatado aos celulares
+   ========================================================================== */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
+    position: relative;
+    background-color: var(--bg);
+}
+
+/* ==========================================================================
+   Header e barra de navegação inferior
+   ========================================================================== */
+
+.header {
+    padding: 16px 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto; 
+    min-height: 0;
+    -webkit-overflow-scrolling: touch;
+
+    padding: 20px 20px 80px 20px;
+}
+
+
+/* Rodapé / Barra de Botões */
+.nav-bottom {
+    padding: 12px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    color: var(--text-light);
+    border-top: 1px solid var(--border); 
+    flex-shrink: 0;
+    margin-top: auto;
+}
+/* ==========================================================================
+   Outras Configurações...
+   ========================================================================== */
+
+h1 {
+    font-family: monospace;
+    color: var(--text-accent);
+}
+h3 {
+    font-family: monospace;
+    color: var(--text-light);
+    margin-top: auto;
+}
+p {
+    font-family: monospace;
+    color: var(--text-accent);
+}
+
+.license {
+    font-family: monospace;
+    color: var(--text-accent);
+    text-align: center;
+    padding-top: 20px;
+    flex-shrink: 0; 
+}
