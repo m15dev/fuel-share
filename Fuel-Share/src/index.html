@@ -15,37 +15,48 @@
         </div>
 
         <main class="main-content">
-            
+                                                                                                                                                                     
             <div class="home-screen">
-                <h1><span id="saudacao">Bem Vindo!</span>, <span id="user-name"></span>!</h1>
-                <p>Este é o conteúdo principal do site. Role para baixo para ver mais.</p>
+                <h1><span id="greeting"></span>, <span id="user-name"></span>!</h1>
+                <p class="subtitulo"><span id="current-city">Pouso Alegre</span> — <span id="lastUpdated">15 min</span></p>
+                
 
                 <div class="fuel-hero">
-                    <h2>Encontre o combustível mais próximo de você!</h2>
+                    <div class="card-top">
+                        <span>⛽ </span>
+                        <span class="fuel-type">GASOLINA COMUM</span>
+                    </div>
+                    
+                    <div class="price-container">
+                        <span class="currency">R$</span>
+                        <span class="fuel-price">6,32</span>
+                        <span class="unit">/L</span>
+                    </div>
+
+                    <div class="card-bottom">
+                        <span id="price-trend-tool" class="price-trend up">▼ -R$0,05 esta semana ▲</span>
+                        <span id="low-price-local">🚗Shell Rodoviaria</span>
+                    </div>
+
                 </div>
 
-                <div style="flex-grow: 1; min-height: 800px; width: 100%;"></div> <!--TEMPORARRIO-->
+                <div style="flex-grow: 1; min-height: 800px; width: 100%;"></div> 
                     
                 <p class="license">© 2026 Fuel Share. All rights reserved.</p>
             </div>
 
-
-            <div class="menu-valor">
-            </div>
-
-
-            <div class="menu-mapa">
-            </div>
-
+            <div class="menu-valor"></div>
+            <div class="menu-mapa"></div>
 
         </main>
 
-        </div> <nav class="nav-bottom">
-        <button class="act1" active>A</button> 
-        <button class="act2">B</button>
-        <button class="act3">C</button>
-    </nav>
+        <nav class="nav-bottom">
+            <button class="act1" active>A</button> 
+            <button class="act2">B</button>
+            <button class="act3">C</button>
+        </nav>
+    </div> 
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>

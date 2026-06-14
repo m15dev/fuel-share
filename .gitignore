@@ -1,7 +1,11 @@
 tests/
 Portifolio/
 fonts/
+node_modules/
 
 .vscode/
 .DS_Store
+.deploy
+package-lock.json
+package.json
 Thumbs.db
