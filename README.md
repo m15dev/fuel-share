@@ -9,10 +9,9 @@
 ## 📸 Production Preview
 
 <div align="center">
-  <img src="./Fuel-Share/icons/Production-preview.png" alt="Fuel-Share Mobile Preview" width="360">
+  <img src="./assets/images/Production-preview.png" alt="Fuel-Share Mobile Preview" width="360">
   <p><em>Sleek Dark Premium interface optimized for mobile devices (#1c1c1c ecosystem).</em></p>
 </div>
-
 ---
 
 ## 🛠️ Core Architecture & Features
