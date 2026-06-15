@@ -41,8 +41,11 @@ For enterprise evaluation, the core codebase, UI components, and state logic can
 
 ```text
 ├── Fuel-Share/
-│   ├── icons/
-│   │   └── Production-preview.png  # Application visual mockup
+│   ├── assets/
+│   │   ├── brand/                  # Logos, badges and visual identity assets
+│   │   ├── icon/                   # App icons and PWA favicons
+│   │   └── images/
+│   │       └── Production-preview.png  # Application visual mockup
 │   └── src/
 │       ├── index.html              # Semantic structure & DOM entry point
 │       ├── main-style.css          # Custom Dark Premium theme & Flexbox layout
