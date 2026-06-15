@@ -35,18 +35,18 @@ function updatePriceTrend(oldPrice, newPrice) {
 
     if (diference > 0) {
         trendElement.classList.add("up");
-        trendElement.innerText = `▲ +R$${diference.toFixed(2)} esta semana`;
+        trendElement.innerText = `▲+R$${diference.toFixed(2)} esta semana`;
     } 
     else if (diference < 0) { 
         trendElement.classList.add("down");
-        trendElement.innerText = `▼ -R$${Math.abs(diference).toFixed(2)} esta semana`;
+        trendElement.innerText = `▼-R$${Math.abs(diference).toFixed(2)} esta semana`;
     } 
     else {
         trendElement.innerText = ` R$${newPrice.toFixed(2)} sem alterações`;
     }
 
 //-----------------------------------------------------
-// Codigo que cuida do tempo de portagem do fuel hero
+// Codigo que cuida do tempo de portagem do fuel hero  
 //-----------------------------------------------------
 
 function calcularTempoDecorrido(dataPostagem) {

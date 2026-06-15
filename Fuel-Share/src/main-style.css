@@ -7,12 +7,12 @@
 }*/
 
 :root {
-    --bg: #1c1c1c
-;
+    --bg: #0A0A0F;
     --border: #363636;
     --text-logo: rgb(240, 118, 47);
     --text-light: aliceblue;
-    --card-bg: #2a2a2a; 
+    --card-bg: rgba(255, 255, 255, 0.02); 
+    --card-border: rgba(255, 255, 255, 0.06);
 }
 
 body.light-mode {
@@ -21,6 +21,7 @@ body.light-mode {
     --text-logo: rgb(210, 88, 17);  
     --text-light: #1a1a1a;        
     --card-bg: #ffffff;
+    --card-border: #e0e0e6;
 }
 
 /* ==========================================================================
@@ -145,13 +146,13 @@ html, body {
     padding: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
+    box-sizing: border-box;
     
-    /* test visual com shadow */
-    background: var(--bg);
-    border: 1px solid var(--card-bg); 
+    background: var(--card-bg); 
+    border: 1px solid var(--card-border); 
     border-radius: 16px;
     
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
     
     display: flex;
     flex-direction: column;
@@ -166,10 +167,43 @@ html, body {
 .fuel-hero .unit { font-size: 24px; font-weight: bold; color: var(--text-logo); }
 
 /* muda cor dependendo da class ai oh*/
-.fuel-hero .price-trend.up{ color: green;}
-.fuel-hero .price-trend.down{ color: red;}
-.fuel-hero .card-bottom{display: flex; justify-content: space-between; align-items: center; margin-top: 10px;}
+.fuel-hero .price-trend.up{ color: #ff4d4d;}
+.fuel-hero .price-trend.down{ color: #2ecc71;}
+.fuel-hero .price-trend::before {font-family: sans-serif; margin-right: -2px;}
+.fuel-hero .card-bottom{display: flex; justify-content: space-between; align-items: center; margin-top: 10px; box-sizing: border-box; flex-wrap: nowrap; gap: 10px;}
 
+.fuel-hero .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
 
+.fuel-hero .card-bottom .price-trend {
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-align: left;
+}
 
+.fuel-hero .card-bottom #low-price-local {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    text-align: right; 
+}
 
+@media (max-width: 375px) {
+    .fuel-hero .card-bottom {
+        font-size: 11px;
+        gap: 8px;
+    }
+    .fuel-hero .fuel-price, 
+    .fuel-hero .currency {
+        font-size: 40px;
+    }
+}
