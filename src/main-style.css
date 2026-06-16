@@ -1,16 +1,9 @@
-/*:root {
-    --bg: #0a0a0a;
-    --border: #1a1a1a;
-    --text-logo: rgb(240, 118, 47);
-    --text-light: aliceblue;
-    --card-bg: #141414; 
-}*/
-
 :root {
     --bg: #0A0A0F;
     --border: #363636;
     --text-logo: rgb(240, 118, 47);
     --text-light: aliceblue;
+    --text-muted: #888894;
     --card-bg: rgba(255, 255, 255, 0.02); 
     --card-border: rgba(255, 255, 255, 0.06);
 }
@@ -25,14 +18,12 @@ body.light-mode {
 }
 
 /* ==========================================================================
-   Configurações abaixo são temporarias 
+   Configurações Gerais e Reset
    ========================================================================== */
+span {  
+    color: var(--text-light); 
+}
 
-   span {  
-    color: var(--text-light); }
-/* ==========================================================================
-   Configurações para o navegador não quebrar o site
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -51,15 +42,12 @@ html, body {
     overflow: hidden;
     background-color: var(--bg);
     overscroll-behavior: none; 
-    position: fixed;
 }
+
 .main-content::-webkit-scrollbar {
     display: none; 
 }
 
-/* ==========================================================================
-   Parte que define o tamanho da div principal para adpatado aos celulares
-   ========================================================================== */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -70,7 +58,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Header e barra de navegação inferior
+   Header e Barra de Navegação
    ========================================================================== */
 .header {
     padding: 16px 20px 12px;
@@ -88,6 +76,7 @@ html, body {
     display: inline-block; 
     animation: brilho-laranja 2s infinite alternate ease-in-out; 
 }
+
 @keyframes brilho-laranja {
     0% { color: var(--text-logo); text-shadow: 0 0 0px rgba(240, 118, 47, 0); transform: scale(1); }
     50% { color: rgb(255, 143, 78); }
@@ -96,23 +85,20 @@ html, body {
 
 .splash1 { color: rgb(4, 163, 4); }
 
-/* ==========================================================================
-   Conteudo principal paginas
-   ========================================================================== */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow-y: auto; 
     min-height: 0;
-    -webkit-overflow-scrolling: touch;
-    padding: 20px 20px 140px 20px; 
+    -webkit-overflow-scrolling: touch; 
+    padding: 20px 20px 90px 20px;
 }
 
 .nav-bottom {
     position: fixed; 
-    bottom: 0;        
-    left: 0;         
+    bottom: 0;         
+    left: 0;          
     width: 100%;
     padding: 12px 20px 20px;
     display: flex;
@@ -123,9 +109,6 @@ html, body {
     z-index: 9999;     
 }
 
-/* ==========================================================================
-   Outras Configurações...
-   ========================================================================== */
 .home-screen h1 { color: var(--text-light); font-size: 22px; }
 .home-screen .subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
 
@@ -139,7 +122,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Conteudo Fuel-Hero
+   Conteudo Fuel-Hero (Card Principal)
    ========================================================================== */
 .fuel-hero {
     width: 100%;
@@ -147,30 +130,25 @@ html, body {
     margin-top: 20px;
     margin-bottom: 20px;
     box-sizing: border-box;
-    
     background: var(--card-bg); 
     border: 1px solid var(--card-border); 
     border-radius: 16px;
-    
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
-    
     display: flex;
     flex-direction: column;
 }
 
-.fuel-hero .card-top {display: flex; }
-.fuel-hero .fuel-type {font-size: 12px; font-weight: bold; color: var(--text-light); text-transform: uppercase; }
+.fuel-hero .card-top { display: flex; }
+.fuel-hero .fuel-type { font-size: 12px; font-weight: bold; color: var(--text-light); text-transform: uppercase; }
 
-.fuel-hero .price-container {display: flex; align-items: baseline; }
+.fuel-hero .price-container { display: flex; align-items: baseline; }
 .fuel-hero .currency { font-size: 48px; font-weight: bold; color: var(--text-logo); }
 .fuel-hero .fuel-price { font-size: 48px; font-weight: bold; color: var(--text-logo); }
 .fuel-hero .unit { font-size: 24px; font-weight: bold; color: var(--text-logo); }
 
-/* muda cor dependendo da class ai oh*/
-.fuel-hero .price-trend.up{ color: #ff4d4d;}
-.fuel-hero .price-trend.down{ color: #2ecc71;}
-.fuel-hero .price-trend::before {font-family: sans-serif; margin-right: -2px;}
-.fuel-hero .card-bottom{display: flex; justify-content: space-between; align-items: center; margin-top: 10px; box-sizing: border-box; flex-wrap: nowrap; gap: 10px;}
+.fuel-hero .price-trend.up { color: #ff4d4d; }
+.fuel-hero .price-trend.down { color: #2ecc71; }
+.fuel-hero .price-trend::before { font-family: sans-serif; margin-right: -2px; }
 
 .fuel-hero .card-bottom {
     display: flex;
@@ -197,13 +175,6 @@ html, body {
     text-align: right; 
 }
 
-@media (max-width: 375px) {
-    .fuel-hero .card-bottom {
-        font-size: 11px;
-        gap: 8px;
-    }
-    .fuel-hero .fuel-price, 
-    .fuel-hero .currency {
-        font-size: 40px;
-    }
-}
+/* ==========================================================================
+   Conteudo Fuel-Cards (Estilo Base para Telas Normais/Grandes)
+   ========================================================================== */

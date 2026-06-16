@@ -11,7 +11,7 @@
     <div class="app-container"> 
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share</span></h1> 
-            <h3>versão: 0.0.0.15_ <span class="splash1">splash-3</span></h3>
+            <h3>versão: 0.0.0.15_ <span class="splash1">splash-5</span></h3>
         </div>
 
         <main class="main-content">
@@ -37,10 +37,48 @@
                         <span id="price-trend-tool" class="price-trend up"></span>
                         <span id="low-price-local">🚗Shell Rodoviaria</span>
                     </div>
-
                 </div>
 
-                <div style="flex-grow: 1; min-height: 800px; width: 100%;"></div> 
+                <h1>Todos os combustíveis</h1>
+                
+                <div class="fuel-grid">
+                    <div class="fuel-card">
+                        <div class="card-top">
+                            <span>⛽ </span>
+                            <span class="fuel-type">GASOLINA COMUM</span>
+                        </div>
+                        
+                        <div class="price-container">
+                            <span class="currency">R$</span>
+                            <span class="mini-fuel-price">6,32</span>
+                            <span class="unit">/L</span>
+                        </div>
+
+                        <div class="card-bottom">
+                            <span id="price-trend-tool" class="price-trend up"></span>
+                            <span id="low-price-local">🚗Shell Rodoviaria</span>
+                        </div>
+                    </div>
+
+                    <div class="fuel-card">
+                        <div class="card-top">
+                            <span>⛽ </span>
+                            <span class="fuel-type">ETANOL</span>
+                        </div>
+                        
+                        <div class="price-container">
+                            <span class="currency">R$</span>
+                            <span class="mini-fuel-price">4,89</span>
+                            <span class="unit">/L</span>
+                        </div>
+
+                        <div class="card-bottom">
+                            <span id="price-trend-tool" class="price-trend down"></span>
+                            <span id="low-price-local">🚗Shell Rodoviaria</span>
+                        </div>
+                    </div>
+            
+                </div>
                     
                 <p class="license">© 2026 Fuel Share. All rights reserved.</p>
             </div>
@@ -51,7 +89,7 @@
         </main>
 
         <nav class="nav-bottom">
-            <button class="act1" active>A</button> 
+            <button class="act1" active> A</button> 
             <button class="act2">B</button>
             <button class="act3">C</button>
         </nav>

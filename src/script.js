@@ -1,9 +1,25 @@
-const nomeUsuario = "Mateus"; 
-document.getElementById("user-name").textContent = nomeUsuario; 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+    .then(reg => {
+        reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    if (confirm("Nova versão disponível. Deseja atualizar?")) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    })
+    .catch(err => console.log('Erro ao registar SW:', err));
+}
 
 //-----------------------------------------------------
-// Sistema de recepção dinmica
+// Sistema de recepção dinâmica
 //-----------------------------------------------------
+const nomeUsuario = "Mateus"; 
+document.getElementById("user-name").textContent = nomeUsuario; 
 
 const horaAtual = new Date().getHours();
 let saudacao = "";
@@ -25,7 +41,7 @@ const cidadeUsuario = "Pouso Alegre";
 document.getElementById("current-city").textContent = cidadeUsuario; 
 
 //-----------------------------------------------------
-// Lógica de Preço (Up/Down)
+// Lógica de Preço (Up/Down) - CHAVE CORRIGIDA AQUI
 //-----------------------------------------------------
 function updatePriceTrend(oldPrice, newPrice) {
     const trendElement = document.getElementById("price-trend-tool");
@@ -35,20 +51,21 @@ function updatePriceTrend(oldPrice, newPrice) {
 
     if (diference > 0) {
         trendElement.classList.add("up");
-        trendElement.innerText = `▲+R$${diference.toFixed(2)} esta semana`;
+        trendElement.innerText = `▲ +R$${diference.toFixed(2)} esta semana`;
     } 
     else if (diference < 0) { 
         trendElement.classList.add("down");
-        trendElement.innerText = `▼-R$${Math.abs(diference).toFixed(2)} esta semana`;
+        trendElement.innerText = `▼ -R$${Math.abs(diference).toFixed(2)} esta semana`;
     } 
     else {
         trendElement.innerText = ` R$${newPrice.toFixed(2)} sem alterações`;
     }
+} // <-- ESSA PORCARIA AQUII OHHHH FEZ EU GAASTAR
+//  2 HORAS E REFAZER O SITE 6 VEZES E NÃO RESOLVIA O PROLEMA
 
 //-----------------------------------------------------
-// Codigo que cuida do tempo de portagem do fuel hero  
+// Codigo que cuida do tempo de postagem do fuel hero  
 //-----------------------------------------------------
-
 function calcularTempoDecorrido(dataPostagem) {
     const agora = new Date();
     const postagem = new Date(dataPostagem);
@@ -70,18 +87,13 @@ function calcularTempoDecorrido(dataPostagem) {
     }
 }
 
-const dataDBlast = "2026-06-13T22:45:00"; //data teste
-
+// Data teste e execução do cálculo de tempo
+const dataDBlast = "2026-06-13T22:45:00"; // Mantido em 2026 conforme seu padrão
 const elementoTempo = document.getElementById("lastUpdated");
 
 if (elementoTempo) {
     elementoTempo.innerText = calcularTempoDecorrido(dataDBlast);
 }
-}
 
-//-----------------------------------------------------
-// 
-//-----------------------------------------------------
-
-// teste do código
+// Teste das funções de preço
 updatePriceTrend(6.27, 6.39);
