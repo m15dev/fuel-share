@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fuel-share-v1';
+const CACHE_NAME = 'fuel-share-v2'; 
 
 const ASSETS = [
   './',
@@ -29,13 +29,25 @@ self.addEventListener('activate', event => {
             );
         })
     );
-    return self.clients.claim();
+    return self.clients.claim(); 
 });
 
 self.addEventListener('fetch', event => {
+    if (!event.request.url.startsWith(self.location.origin)) return;
+
     event.respondWith(
-        caches.match(event.request).then(cachedResponse => {
-            return cachedResponse || fetch(event.request);
-        })
+        fetch(event.request)
+            .then(response => {  
+                if (response.status === 200) {
+                    const responseClone = response.clone();
+                    caches.open(CACHE_NAME).then(cache => {
+                        cache.put(event.request, responseClone);
+                    });
+                }
+                return response;
+            })
+            .catch(() => {
+                return caches.match(event.request);
+            })
     );
 });
