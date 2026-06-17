@@ -1,14 +1,57 @@
-:root {
-    --bg: #0A0A0F;
-    --border: #363636;
+/* ==========================================================================
+   Configuração de Temas do Fuel-Share
+   ========================================================================== */
+
+/* ☕ TEMA 1 (PADRÃO): ESTILO CAFÉ */
+
+/*tema de café muito dahora hehehehehehehehehe*/
+body, body.tema-1 {
+    --bg: #0A0A0A;               
+    --border: #1F1F1F;           
     --text-logo: rgb(240, 118, 47);
-    --text-light: aliceblue;
-    --text-muted: #888894;
-    --card-bg: rgba(255, 255, 255, 0.02); 
-    --card-border: rgba(255, 255, 255, 0.06);
+    --text-light: #FFFFFF;       
+    --text-muted: #666666;       
+    --card-bg: #121212;          
+    --card-border: #262626;      
+    --radius-main: 16px;
+}
+/*  TEMA 2 - Preto AMOLED ideal (Spotify) */
+body, body.tema-2 {
+    --bg: #121212;          
+    --card-bg: #1C1C1E;     
+    --border: #242426;           
+    --text-logo: rgb(240, 118, 47);
+    --text-light: #FFFFFF;       
+    --text-muted: #8E8E93;       
+    --card-border: #2C2C2E;      
+    --radius-main: 16px;
+    
+}
+/* TEMA 3: CINZA ESPACIAL (Instagram) */
+body.tema-3 {
+    --bg: #0C0F14;               
+    --border: #1E232B;           
+    --text-logo: rgb(240, 118, 47);
+    --text-light: #F5F7FA;       
+    --text-muted: #71767F;       
+    --card-bg: #161A22;          
+    --card-border: #222731;      
+    --radius-main: 16px;
 }
 
-body.light-mode {
+/* 🧪 TEMA 4: VIDRO FUMÊ (Efeito Translúcido) */
+body.tema-4 {
+    --bg: #0C0F14;               
+    --border: rgba(255, 255, 255, 0.08);           
+    --text-logo: rgb(240, 118, 47);
+    --text-light: aliceblue;       
+    --text-muted: #888894;       
+    --card-bg: rgba(255, 255, 255, 0.03); 
+    --card-border: rgba(255, 255, 255, 0.07);    
+    --radius-main: 16px;
+}
+
+body.tema-1-L {
     --bg: #f5f5fa;                    
     --border: #e0e0e6;                
     --text-logo: rgb(210, 88, 17);  
@@ -16,6 +59,7 @@ body.light-mode {
     --card-bg: #ffffff;
     --card-border: #e0e0e6;
 }
+
 
 /* ==========================================================================
    Configurações Gerais e Reset
@@ -138,6 +182,8 @@ html, body {
     flex-direction: column;
 }
 
+.fuel-hero:active{transform:scale(0.99); transition:all 0.2s; }
+
 .fuel-hero .card-top { display: flex; }
 .fuel-hero .fuel-type { font-size: 12px; font-weight: bold; color: var(--text-light); text-transform: uppercase; }
 
@@ -178,3 +224,65 @@ html, body {
 /* ==========================================================================
    Conteudo Fuel-Cards (Estilo Base para Telas Normais/Grandes)
    ========================================================================== */
+
+.TitleBox{
+    margin-bottom: 20px;
+}
+
+.fuel-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px}
+
+.fuel-card{
+    background:var(--card-bg);
+    height: 105px;
+    border-radius:var(--radius-main);
+    padding:14px;border:
+    1px solid var(--border);
+    cursor:pointer;
+    transition:all 0.2s
+}
+.fuel-card:active{transform:scale(0.97)}
+.fuel-grid .fuel-card .card-top{display: flex ; justify-content: space-between; align-items: center; margin-bottom: 12px;}
+
+.fuel-grid .fuel-card .badge{padding: 2px 6px; border-radius: 16px;}
+.fuel-grid .fuel-card .badge.up{background-color: rgba(255, 0, 0, 0.1); color: red}
+.fuel-grid .fuel-card .badge.down{background-color: rgba(0, 255, 0, 0.1); color: green}
+
+.news-card {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background: var(--card-bg); 
+    border: 1px solid var(--card-border); 
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+/* ==========================================================================
+   Conteudo Fuel-News (Noticias em geral sobre combustivel)
+   ========================================================================== */
+
+
+.span, h3, p{
+    color: white;
+}
+
+.fuel-news .news-card .top{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 12px;
+    padding: 2px 8px; 
+    border-radius: 16px;
+    }
+.fuel-news .news-card .top .badge.up{background-color: rgba(255, 0, 0, 0.1); color: red}
+.fuel-news .news-card .top .badge.down{background-color: rgba(0, 255, 0, 0.1); color: green}

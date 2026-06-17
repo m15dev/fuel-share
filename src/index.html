@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="main-style.css?v=1">
     <link rel="manifest" href="manifest.json">
     <title>Fuel-Share</title>
 </head>
-<body>
+<body class="tema-1">
     <div class="app-container"> 
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share</span></h1> 
@@ -39,47 +39,56 @@
                     </div>
                 </div>
 
-                <h1>Todos os combustíveis</h1>
+                <div class="TitleBox"><h1>Todos os combustíveis</h1></div>
                 
                 <div class="fuel-grid">
                     <div class="fuel-card">
-                        <div class="card-top">
-                            <span>⛽ </span>
-                            <span class="fuel-type">GASOLINA COMUM</span>
-                        </div>
-                        
-                        <div class="price-container">
-                            <span class="currency">R$</span>
-                            <span class="mini-fuel-price">6,32</span>
-                            <span class="unit">/L</span>
-                        </div>
-
-                        <div class="card-bottom">
-                            <span id="price-trend-tool" class="price-trend up"></span>
-                            <span id="low-price-local">🚗Shell Rodoviaria</span>
-                        </div>
+                        <div class="card-top"><span>⛽ </span> <span class="badge up">▲ +0.31</span></div>
+                        <span class="fuel-type">GASOLINA COMUM</span>
                     </div>
 
                     <div class="fuel-card">
-                        <div class="card-top">
-                            <span>⛽ </span>
-                            <span class="fuel-type">ETANOL</span>
-                        </div>
-                        
-                        <div class="price-container">
-                            <span class="currency">R$</span>
-                            <span class="mini-fuel-price">4,89</span>
-                            <span class="unit">/L</span>
-                        </div>
-
-                        <div class="card-bottom">
-                            <span id="price-trend-tool" class="price-trend down"></span>
-                            <span id="low-price-local">🚗Shell Rodoviaria</span>
-                        </div>
+                        <div class="card-top"><span>🌿 </span> <span class="badge down">▼ -0.20</span></div>
+                        <span class="fuel-type">ETANOL</span>
                     </div>
-            
+
+                    <div class="fuel-card">
+                        <div class="card-top"><span>🌿 </span> <span class="badge down">▼ -0.40</span></div>
+                        <span class="fuel-type">Petróleo</span>
+                    </div>
+                    
+                    <div class="fuel-card">
+                        <div class="card-top"><span>🌿 </span> <span class="badge up">▲ +0.32</span></div>
+                        <span class="fuel-type">%FUEL-TYPE%</span>
+                    </div>
+
                 </div>
                     
+                <div class="TitleBox"><h1>Ultimas notícias</h1></div>
+
+                <div class="fuel-news">
+                    <div id="News-1" class="news-card">
+                        <div class="top"><span class="badge up">▲ Urgente</span></div>
+                        <div class="content"><h3>Barril de Petróleo Brent ultrapassa os U$ 85 após tensões no Oriente Médio</h3>
+                        <p>A alta internacional já acende o alerta nas refinarias brasileiras para possíveis novos reajustes nas próximas semanas.</p>
+                        </div>
+                    </div>
+
+                    <div id="News-2" class="news-card">
+                        <div class="top"><span class="badge down">▼ Mercado</span></div>
+                        <div class="content"><h3>Venda de carros elétricos bate recorde e puxa consumo de energia no país</h3>
+                        <p>Com mais tomadas nas rodovias, motoristas começam a migrar e postos tradicionais já instalam carregadores rápidos.</p>
+                        </div>
+                    </div>
+
+                    <div id="News-3" class="news-card">
+                        <div class="top"><span class="badge down">▼ Safra</span></div>
+                        <div class="content"><h3>Safra recorde de cana-de-açúcar promete derrubar preço do Etanol nas usinas</h3>
+                        <p>A expectativa de boa colheita no Centro-Sul deve fazer o combustível vegetal ficar ainda mais competitivo frente à gasolina.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <p class="license">© 2026 Fuel Share. All rights reserved.</p>
             </div>
 
