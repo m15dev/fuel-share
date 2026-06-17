@@ -21,7 +21,7 @@ This project was built focusing on **clean code, separation of concerns, and vis
 * **Dynamic 'Fuel-Hero' Component:** An isolated UI section that acts as the primary display, dynamically adapting its content based on the user's primary fuel preference (Gasoline, Ethanol, or Diesel).
 * **Asynchronous Time-Elapsed Engine:** A JavaScript utility that computes time intervals from data entry timestamps, updating the DOM dynamically (*e.g., "Updated 15 min ago"*, *"2 days ago"*).
 * **Smart Trend Analysis Badges:** State-driven visual hooks (`▲` or `▼`) that automatically manipulate CSS classes (`.up` / `.down`) to shift color contrast dynamically based on market volatility.
-* **Glassmorphic UI Design:** A tailored background color (`#1c1c1c`) layered with subtle opacities and sharp borders (`rgba(255, 255, 255, 0.08)`) ensuring depth, premium look, and reduced eye strain.
+* **Glassmorphic UI Design:** A tailored background color (`#1c1c1c`) layered with subtle opacities and sharp borders (`rgba(255, 255, 255, 0.07)`) ensuring depth, premium look, and reduced eye strain.
 
 ---
 
