@@ -153,8 +153,8 @@ html, body {
     z-index: 9999;     
 }
 
-.home-screen h1 { color: var(--text-light); font-size: 22px; }
-.home-screen .subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
+#page-home h1 { color: var(--text-light); font-size: 22px; }
+#page-home .subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
 
 .license {
     font-family: monospace;
@@ -164,6 +164,19 @@ html, body {
     flex-shrink: 0; 
     font-size: 11px;
 }
+/* ==========================================================================
+   Configuração de pagina ativa
+   ========================================================================== */
+.page{
+    display: none;
+    margin-bottom: 70px;
+}
+
+.page.active{
+    display: block;
+}
+
+
 
 /* ==========================================================================
    Conteudo Fuel-Hero (Card Principal)
@@ -230,6 +243,7 @@ html, body {
 }
 
 .fuel-grid{
+
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
@@ -276,13 +290,22 @@ html, body {
     color: white;
 }
 
-.fuel-news .news-card .top{
+.fuel-news .news-card .top {
     display: flex; 
-    justify-content: space-between; 
+    justify-content: flex-start; 
     align-items: center; 
     margin-bottom: 12px;
+}
+
+.fuel-news .news-card .top .badge {
+    display: inline-flex; 
+    align-items: center;
     padding: 2px 8px; 
     border-radius: 16px;
-    }
+    font-size: 11px;
+    font-weight: bold;
+}
+
+
 .fuel-news .news-card .top .badge.up{background-color: rgba(255, 0, 0, 0.1); color: red}
 .fuel-news .news-card .top .badge.down{background-color: rgba(0, 255, 0, 0.1); color: green}
