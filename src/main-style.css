@@ -169,7 +169,7 @@ html, body {
    ========================================================================== */
 .page{
     display: none;
-    margin-bottom: 70px;
+    margin-bottom: 10px;
 }
 
 .page.active{
@@ -286,7 +286,7 @@ html, body {
    ========================================================================== */
 
 
-.span, h3, p{
+.span, h3, h1, p{
     color: white;
 }
 
@@ -309,3 +309,61 @@ html, body {
 
 .fuel-news .news-card .top .badge.up{background-color: rgba(255, 0, 0, 0.1); color: red}
 .fuel-news .news-card .top .badge.down{background-color: rgba(0, 255, 0, 0.1); color: green}
+
+
+
+/* ==========================================================================
+   PÁGINA 2
+   ========================================================================== */
+
+#page-valor h1 { color: var(--text-light); font-size: 22px; }
+#page-valor .subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
+
+
+#page-valor .fuel-pannel{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px
+}
+
+
+/*.fuel-pannel {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background: var(--card-bg); 
+    border: 1px solid var(--card-border); 
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
+    display: flex;
+    flex-direction: column;
+}*/
+
+/*.fuel-pannel{
+    width: 100%;
+    padding: 20x;
+    marign-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        display: grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}*/
+
+.fuel .fuel-pannel.fuel-button{
+    background:var(--card-bg);
+    height: 105px;
+    border-radius:var(--radius-main);
+    padding:14px;border:
+    1px solid var(--border);
+    cursor:pointer;
+    transition:all 0.2s
+}
