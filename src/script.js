@@ -97,3 +97,38 @@ if (elementoTempo) {
 
 // Teste das funções de preço
 updatePriceTrend(6.27, 6.39);
+
+
+// ==========================================================================
+// 📱 SISTEMA DE NAVEGAÇÃO (TROCA DE PÁGINAS)
+// ==========================================================================
+
+const botaoHome = document.querySelector('.act1');
+const botaoValor = document.querySelector('.act2');
+const botaoMapa = document.querySelector('.act3');
+
+botaoHome.addEventListener('click', () => trocarPagina('page-home'));
+botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
+botaoMapa.addEventListener('click', () => trocarPagina('page-mapa'));
+
+function trocarPagina(idDaPaginaAlvo) {
+    const todasAsPaginas = document.querySelectorAll('.page');
+    todasAsPaginas.forEach(pagina => {
+        pagina.classList.remove('active');
+    });
+
+    const paginaAlvo = document.getElementById(idDaPaginaAlvo);
+    if (paginaAlvo) {
+        paginaAlvo.classList.add('active');
+    }
+
+ 
+    const todosOsBotoes = document.querySelectorAll('.nav-bottom button');
+    todosOsBotoes.forEach(botao => {
+        botao.removeAttribute('active'); // Tira o visual ativo dos outros
+    });
+    
+    if (idDaPaginaAlvo === 'page-home') botaoHome.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-valor') botaoValor.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-mapa') botaoMapa.setAttribute('active', '');
+}
