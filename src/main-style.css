@@ -64,7 +64,7 @@ body.tema-1-L {
 /* ==========================================================================
    Configurações Gerais e Reset
    ========================================================================== */
-span {  
+.span {  
     color: var(--text-light); 
 }
 
@@ -100,6 +100,8 @@ html, body {
     position: relative;
     background-color: var(--bg);
 }
+
+
 
 /* ==========================================================================
    Header e Barra de Navegação
@@ -153,8 +155,8 @@ html, body {
     z-index: 9999;     
 }
 
-#page-home h1 { color: var(--text-light); font-size: 22px; }
-#page-home .subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
+.h1 { color: var(--text-light); }
+.subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
 
 .license {
     font-family: monospace;
@@ -316,49 +318,16 @@ html, body {
    PÁGINA 2
    ========================================================================== */
 
-#page-valor h1 { color: var(--text-light); font-size: 22px; }
-#page-valor .subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
-
-
-#page-valor .fuel-pannel{
+.fuel-pannel-grid{
+    margin-top: 20px;
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
-    margin-bottom:20px
+    margin-bottom:20px;
+    transition:all 0.2s;
 }
 
-
-/*.fuel-pannel {
-    width: 100%;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    background: var(--card-bg); 
-    border: 1px solid var(--card-border); 
-    border-radius: 16px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
-    display: flex;
-    flex-direction: column;
-}*/
-
-/*.fuel-pannel{
-    width: 100%;
-    padding: 20x;
-    marign-top: 20px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-        display: grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:20px;
-}*/
-
-.fuel .fuel-pannel.fuel-button{
+.fuel-pannel-grid .fuel-card {
     background:var(--card-bg);
     height: 105px;
     border-radius:var(--radius-main);

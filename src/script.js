@@ -132,3 +132,28 @@ function trocarPagina(idDaPaginaAlvo) {
     if (idDaPaginaAlvo === 'page-valor') botaoValor.setAttribute('active', '');
     if (idDaPaginaAlvo === 'page-mapa') botaoMapa.setAttribute('active', '');
 }
+
+
+// ==========================================================================
+// ⌨️ NAVEGAÇÃO POR TECLADO (SETAS ESQUERDA E DIREITA) - VERSÃO ADAPTADA
+// ==========================================================================
+
+const ordemPaginas = ['page-home', 'page-valor', 'page-mapa'];
+
+window.addEventListener('keydown', (event) => {
+    const paginaAtivaAtual = document.querySelector('.page.active');
+    if (!paginaAtivaAtual) return;
+
+    const idAtual = paginaAtivaAtual.id;
+    
+    let indiceAtual = ordemPaginas.indexOf(idAtual);
+
+    if (event.key === 'ArrowRight') {
+        let proximoIndice = (indiceAtual + 1) % ordemPaginas.length;
+        trocarPagina(ordemPaginas[proximoIndice]);
+    } 
+    else if (event.key === 'ArrowLeft') {
+        let indiceAnterior = (indiceAtual - 1 + ordemPaginas.length) % ordemPaginas.length;
+        trocarPagina(ordemPaginas[indiceAnterior]);
+    }
+});
