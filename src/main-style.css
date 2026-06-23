@@ -64,7 +64,7 @@ body.tema-1-L {
 /* ==========================================================================
    Configurações Gerais e Reset
    ========================================================================== */
-.span {  
+span {  
     color: var(--text-light); 
 }
 
@@ -311,6 +311,18 @@ html, body {
 
 .fuel-news .news-card .top .badge.up{background-color: rgba(255, 0, 0, 0.1); color: red}
 .fuel-news .news-card .top .badge.down{background-color: rgba(0, 255, 0, 0.1); color: green}
+
+
+/* ==========================================================================
+   Menu Perfil
+   ========================================================================== */
+#profile-menu{
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    background-color: white;
+}
+
 
 
 
