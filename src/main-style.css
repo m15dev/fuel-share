@@ -2,8 +2,7 @@
    Configuração de Temas do Fuel-Share
    ========================================================================== */
 
-/* ☕ TEMA 1 (PADRÃO): ESTILO CAFÉ */
-
+/*TEMA 1 (PADRÃO): ESTILO CAFÉ */
 /*tema de café muito dahora hehehehehehehehehe*/
 body, body.tema-1 {
     --bg: #0A0A0A;               
@@ -25,7 +24,6 @@ body, body.tema-2 {
     --text-muted: #8E8E93;       
     --card-border: #2C2C2E;      
     --radius-main: 16px;
-    
 }
 /* TEMA 3: CINZA ESPACIAL (Instagram) */
 body.tema-3 {
@@ -115,8 +113,8 @@ html, body {
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
 }
-.header h1 { font-size: 24px; color: var(--text-light); cursor: pointer; }
-.header h3 { font-size: 11px; color: #666666; }
+h1 { font-size: 24px; color: var(--text-light); cursor: pointer; }
+h3 { font-size: 11px; color: #666666; }
 
 .logo-animation { 
     display: inline-block; 
@@ -138,7 +136,7 @@ html, body {
     overflow-y: auto; 
     min-height: 0;
     -webkit-overflow-scrolling: touch; 
-    padding: 20px 20px 90px 20px;
+    padding: 20px 20px 110px 20px;
 }
 
 .nav-bottom {
@@ -155,8 +153,18 @@ html, body {
     z-index: 9999;     
 }
 
-.h1 { color: var(--text-light); }
-.subtitulo { color: #888888; margin-top: 5px; font-size: 13px; }
+
+.subtitulo { 
+    color: #888888; 
+    font-size: 13px; 
+    margin-top: 5px;
+    margin-bottom: 0;
+    display: block; 
+}
+
+.subtitulo span {
+    color: inherit; 
+}
 
 .license {
     font-family: monospace;
@@ -166,6 +174,27 @@ html, body {
     flex-shrink: 0; 
     font-size: 11px;
 }
+
+/* ==========================================================================
+   Menu Perfil
+   ========================================================================== */
+#profile-menu{
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 100%;
+    border: 2px solid var(--border);
+}
+#profile-menu img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
 /* ==========================================================================
    Configuração de pagina ativa
    ========================================================================== */
@@ -177,7 +206,6 @@ html, body {
 .page.active{
     display: block;
 }
-
 
 
 /* ==========================================================================
@@ -282,13 +310,12 @@ html, body {
 
 }
 
-
 /* ==========================================================================
    Conteudo Fuel-News (Noticias em geral sobre combustivel)
    ========================================================================== */
 
 
-.span, h3, h1, p{
+h3, h2, h1, p{
     color: white;
 }
 
@@ -308,30 +335,15 @@ html, body {
     font-weight: bold;
 }
 
-
 .fuel-news .news-card .top .badge.up{background-color: rgba(255, 0, 0, 0.1); color: red}
 .fuel-news .news-card .top .badge.down{background-color: rgba(0, 255, 0, 0.1); color: green}
-
-
-/* ==========================================================================
-   Menu Perfil
-   ========================================================================== */
-#profile-menu{
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    background-color: white;
-}
-
-
-
 
 /* ==========================================================================
    PÁGINA 2
    ========================================================================== */
 
 .fuel-pannel-grid{
-    margin-top: 20px;
+    margin-top: 5px;
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
@@ -343,8 +355,27 @@ html, body {
     background:var(--card-bg);
     height: 105px;
     border-radius:var(--radius-main);
-    padding:14px;border:
-    1px solid var(--border);
+    padding:14px;
+    border: 1px solid var(--border);
     cursor:pointer;
     transition:all 0.2s
+}
+.price-input{
+    height: 50px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+    border-radius: var(--radius-main);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+.value-card{
+    background-color: var(--card-bg);;
+    width: 100%;
+    height: 20px;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+
 }

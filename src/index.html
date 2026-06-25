@@ -12,14 +12,14 @@
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share</span></h1> 
             <h3>versão: 0.0.0.15_ <span class="splash1">splash-5</span></h3>
-            <div id="profile-menu"></div>
+            <button id="profile-menu"><img src="../assets/icons/user-icon.jpg"></button>
         </div>
 
         <main class="main-content">
                                                                                                                                                                      
             <div id="page-home" class="page un-active">
                 <h1><span id="greeting"></span>, <span id="user-name"></span>!</h1>
-                <p><span class="subtitulo" id="current-city">Pouso Alegre</span> — <span class="subtitulo" id="lastUpdated">15 min</span></p>
+                <p class="subtitulo"><span id="current-city">Pouso Alegre</span> — <span id="lastUpdated">15 min</span></p>
                 
 
                 <div class="fuel-hero">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="TitleBox"><h1>Todos os combustíveis</h1></div>
+                <div class="TitleBox"><h2>Todos os combustíveis</h1></div>
                 
                 <div class="fuel-grid">
                     <div class="fuel-card">
@@ -96,12 +96,20 @@
             <div id="page-valor" class="page active">
                 <h1>Adicionar Preço</h1>
                 <p class="subtitulo">Compatilhe o preço de combustível.</p>
+                <br>
+                <p class="subtitulo">TIPO DE COMBUSTÍVEL</p>
 
-                <div class="fuel-pannel-grid">                    
-                        <div class="fuel-card fuel1"></div>
-                        <div class="fuel-card fuel2"></div>
-                        <div class="fuel-card fuel3"></div>
-                        <div class="fuel-card fuel4"></div>
+                <div class="fuel-pannel-grid"> <!--Botão de seleção preço-->                    
+                    <div class="fuel-card fuel1"></div>
+                    <div class="fuel-card fuel2"></div>
+                    <div class="fuel-card fuel3"></div>
+                    <div class="fuel-card fuel4"></div>
+                </div>
+
+                <p class="subtitulo">PREÇO POR LITRO</p>
+                <div class="price-input">
+                    <span class="subtitulo">R$</span>
+                    <input id="fuel-price-input" type="text" placeholder="0,00" inputmode="numeric" class="value-card" required>
                 </div>
             </div>
 
@@ -116,12 +124,14 @@
         </main>
 
         <nav class="nav-bottom">
-            <button class="act1" active> A</button> 
-            <button class="act2">B</button>
-            <button class="act3">C</button>
+            <button class="act1" active>Início</button> 
+            <button class="act2">Adicionar</button>
+            <button class="act3">Mapa</button>
         </nav>
     </div> 
 
     <script src="script.js"></script>
+    <script src="fuel-manager.js"></script>
+    <script src="debug-pannel.js"></script>
 </body>
 </html>

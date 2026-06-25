@@ -157,3 +157,4 @@ window.addEventListener('keydown', (event) => {
         trocarPagina(ordemPaginas[indiceAnterior]);
     }
 });
+
