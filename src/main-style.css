@@ -162,6 +162,7 @@ h3 { font-size: 11px; color: #666666; }
     display: block; 
 }
 
+
 .subtitulo span {
     color: inherit; 
 }
@@ -360,6 +361,8 @@ h3, h2, h1, p{
     cursor:pointer;
     transition:all 0.2s
 }
+.sub-subtitulo { color: #888888; font-size: 20px; margin-bottom: 0; display: block; }
+
 .price-input{
     height: 50px;
     margin-top: 5px;
@@ -377,5 +380,34 @@ h3, h2, h1, p{
     border: none;
     outline: none;
     color: var(--text-light);
-
 }
+.sub-subtitulo { 
+    color: #888888;
+    padding: 0 10px; 
+    font-size: 30px; 
+    margin-bottom: 0; 
+    display: block; 
+}
+
+#fuel-price-input{font-size: 30px;}
+
+
+
+/*workonlatter
+.station-card {
+    width: 100%;
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--card-bg);
+
+    text-align: left;
+
+    cursor: pointer;
+} */
+
+

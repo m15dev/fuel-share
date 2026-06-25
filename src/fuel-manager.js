@@ -1,4 +1,6 @@
 const input = document.getElementById("fuel-price-input");
+const elemento = document.getElementById("cck-1");
+const elemento2 = document.getElementById("cck-2");
 
 input.addEventListener("input", () => {
     let value = input.value.replace(/\D/g, "");
@@ -9,11 +11,15 @@ input.addEventListener("input", () => {
     }
 
     value = value.slice(0, 4);
-
     value = (parseInt(value, 10) / 100).toFixed(2);
-
     input.value = value.replace(".", ",");
+
+    elemento.style.color = "white";
+
+    elemento2.style.color = "white";
+  
 });
+
 
 //Converting it back to shove it up to supabase
 const price = parseFloat(

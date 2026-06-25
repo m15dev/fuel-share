@@ -36,3 +36,65 @@ versionLabel.addEventListener("click", () => {
         console.log("Debug mode:", enabled ? "ON" : "OFF");
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//workonlatter
+
+
+const stationList = document.getElementById("station-list");
+
+data.elements.forEach((station) => {
+    const card = document.createElement("button");
+
+    card.className = "station-card";
+
+    card.textContent =
+        station.tags?.name || "Unnamed Station";
+
+    card.addEventListener("click", () => {
+        console.log("Selected:", station.id);
+
+        selectedStation = station;
+    });
+
+    stationList.appendChild(card);
+});
