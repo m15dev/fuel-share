@@ -39,9 +39,9 @@ navigator.geolocation.getCurrentPosition(async (position) => {
     const query = `
         [out:json];
         (
-            node["amenity"="fuel"](around:1000,${lat},${lon});
-            way["amenity"="fuel"](around:1000,${lat},${lon});
-            relation["amenity"="fuel"](around:1000,${lat},${lon});
+            node["amenity"="fuel"](around:10000,${lat},${lon});
+            way["amenity"="fuel"](around:10000,${lat},${lon});
+            relation["amenity"="fuel"](around:10000,${lat},${lon});
         );
         out center;
     `;
@@ -61,8 +61,12 @@ navigator.geolocation.getCurrentPosition(async (position) => {
         console.log(data.elements);
 
         data.elements.forEach((station) => {
+
+            console.log(station);
+
             console.log(
                 station.tags?.name || "Unnamed Station"
+                
             );
         });
 

@@ -410,4 +410,14 @@ h3, h2, h1, p{
     cursor: pointer;
 } */
 
+#Push-Data{margin-top: 30px; }
 
+.Button-Default{
+    height: 50px;
+    width: 100%;
+    background-color: var(--text-logo);
+    border-radius: var(--radius-main);
+    border: 1px solid var(--bg);
+    outline: none;
+    align-items: center;
+}
