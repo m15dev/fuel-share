@@ -106,10 +106,12 @@ updatePriceTrend(6.27, 6.39);
 const botaoHome = document.querySelector('.act1');
 const botaoValor = document.querySelector('.act2');
 const botaoMapa = document.querySelector('.act3');
+const botaoPerfil = document.querySelector('.profile-menu')
 
 botaoHome.addEventListener('click', () => trocarPagina('page-home'));
 botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
 botaoMapa.addEventListener('click', () => trocarPagina('page-mapa'));
+botaoPerfil.addEventListener('click', () => trocarPagina('page-perfil'))
 
 function trocarPagina(idDaPaginaAlvo) {
     const todasAsPaginas = document.querySelectorAll('.page');
@@ -131,6 +133,7 @@ function trocarPagina(idDaPaginaAlvo) {
     if (idDaPaginaAlvo === 'page-home') botaoHome.setAttribute('active', '');
     if (idDaPaginaAlvo === 'page-valor') botaoValor.setAttribute('active', '');
     if (idDaPaginaAlvo === 'page-mapa') botaoMapa.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-perfil') botaoPerfil.setAttribute('active', '');
 }
 
 

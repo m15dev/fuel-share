@@ -10,9 +10,9 @@
 <body class="tema-1">
     <div class="app-container"> 
         <div class="header"> 
-            <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share</span></h1> 
-            <h3>versão: 0.0.0.15_ <span class="splash1">splash-5</span></h3>
-            <button id="profile-menu"><img src="../assets/icons/user-icon.jpg"></button>
+            <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share™</span></h1> 
+            <h3>versão: 0.0.15_ <span class="splash1">splash-5</span></h3>
+            <button class="profile-menu"><img src="../assets/icons/user-icon.jpg"></button>
         </div>
 
         <main class="main-content">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <p class="license">© 2026 Fuel Share. All rights reserved.</p>
+                <p class="license">© 2026 Fuel Share™. All rights reserved.</p>
             </div>
 
             <div id="page-valor" class="page active">
@@ -106,10 +106,12 @@
                     <div class="fuel-card fuel4"><h1>OPÇÃO 4</h1></div>
                 </div>
 
+                <!------------------------------------------------------------>
+
                 <p class="subtitulo">PREÇO POR LITRO</p>
                 <div class="price-input">
                     <span id="cck-1" class="sub-subtitulo">R$: </span>
-                    <input id="fuel-price-input" type="text" placeholder="0,00" inputmode="numeric" class="value-card" required>
+                    <input id="fuel-price-input"  class="value-card" type="text" placeholder="0,00" inputmode="numeric" required>
                 </div>
 
                 <p class="subtitulo">POSTO</p>
@@ -119,24 +121,21 @@
                 </div>
 
                 <p class="subtitulo">OBSERVAÇÃO (OPCIONAL)</p>
-                <div id="station-list">
-                    <div class="price-input">
-                    <input id="fuel-price-input" type="text" placeholder="Posto Lotado" inputmode="text" class="value-card">
+                <div id="extra-info-card">
+                    <div class="extra-info">
+                    <input id="extra-info-input"  class="value-card" type="text" placeholder="Posto Lotado" inputmode="text">
                 </div>
 
                 <div id="Push-Data">
                     <div class="Button-Default">
-                    <button class="Button-Default"></button>
+                    <button id="btn-1">PUBLICAR PREÇO</button>
                     </div>
                 </div>
 
             <div id="page-mapa" class="page un-active">
-
-
             </div>
 
-            <div class="menu-valor"></div>
-            <div class="menu-mapa"></div>
+            <div id="page-perfil"></div>
 
         </main>
 

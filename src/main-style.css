@@ -179,7 +179,7 @@ h3 { font-size: 11px; color: #666666; }
 /* ==========================================================================
    Menu Perfil
    ========================================================================== */
-#profile-menu{
+.profile-menu{
     height: 30px;
     width: 30px;
     padding: 0;
@@ -187,13 +187,12 @@ h3 { font-size: 11px; color: #666666; }
     border-radius: 100%;
     border: 2px solid var(--border);
 }
-#profile-menu img{
+.profile-menu img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
-
 
 
 /* ==========================================================================
@@ -274,11 +273,11 @@ h3 { font-size: 11px; color: #666666; }
 }
 
 .fuel-grid{
-
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
-    margin-bottom:20px}
+    margin-bottom:20px
+}
 
 .fuel-card{
     background:var(--card-bg);
@@ -354,14 +353,13 @@ h3, h2, h1, p{
 
 .fuel-pannel-grid .fuel-card {
     background:var(--card-bg);
-    height: 105px;
+    height: 85px; /* Default Should be: 105px*/
     border-radius:var(--radius-main);
     padding:14px;
     border: 1px solid var(--border);
     cursor:pointer;
     transition:all 0.2s
 }
-.sub-subtitulo { color: #888888; font-size: 20px; margin-bottom: 0; display: block; }
 
 .price-input{
     height: 50px;
@@ -389,11 +387,12 @@ h3, h2, h1, p{
     display: block; 
 }
 
+
+/*PREÇO LITRO*/
 #fuel-price-input{font-size: 30px;}
 
 
-
-/*workonlatter
+/*workonlatter Gas Station local
 .station-card {
     width: 100%;
     padding: 15px;
@@ -410,14 +409,35 @@ h3, h2, h1, p{
     cursor: pointer;
 } */
 
-#Push-Data{margin-top: 30px; }
 
+/*EXTRA INFO CARD*/
+
+/*#extra-info-card{}*/
+.extra-info{
+    height: 50px;
+    width: 100%;
+    padding: 0px 10px;
+    background-color: var(--card-bg);
+    border-radius: var(--radius-main);
+    border: 1px solid var(--bg);
+    display: flex;
+    align-items: center;
+}
+#extra-info-input{font-size: 30px;}
+
+/*EXTRA INFO CARD*/
+
+
+#Push-Data{margin-top: 20px; }
+
+.Button-Default:active{transform:scale(0.98); transition:all 0.1s;}
 .Button-Default{
     height: 50px;
     width: 100%;
+    padding: 0px 10px;
     background-color: var(--text-logo);
     border-radius: var(--radius-main);
     border: 1px solid var(--bg);
-    outline: none;
-    align-items: center;
+    display: flex;
 }
+#btn-1{ margin: auto; font-size: 30px; background-color: var(--text-logo); border: none;}
