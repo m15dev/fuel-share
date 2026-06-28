@@ -12,7 +12,7 @@ console.log("🚀 Supabase Inicializado com Sucesso!");
 
 function gerarUUIDAleatorio() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        var r = Math.random() * 16 | 0, vh = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
@@ -51,3 +51,18 @@ async function salvarPrecoCombustivel(stationId, tipoCombustivel, valorPreco) {
 // 4. TESTE F
 const idDoMeuPostoReal = "15803d23-58c7-468d-a861-16e5a7a82255";
 salvarPrecoCombustivel(idDoMeuPostoReal, 1, 5.89);
+
+
+// Função para você logar no seu próprio computador
+async function fazerLogin(email, senha) {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: senha,
+    });
+
+    if (error) {
+        console.error("Erro ao logar:", error.message);
+    } else {
+        console.log("🚀 Logado com sucesso! Agora você é um usuário autenticado.");
+    }
+}
