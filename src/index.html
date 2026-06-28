@@ -11,7 +11,7 @@
     <div class="app-container"> 
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share™</span></h1> 
-            <h3>versão: 0.0.15_ <span class="splash1">splash-5</span></h3>
+            <h3 id="version-label" style="cursor: pointer;">versão: 0.0.15_ <span class="splash1">splash-5</span></h3>
             <button class="profile-menu"><img src="../assets/icons/user-icon.jpg"></button>
         </div>
 
@@ -147,7 +147,16 @@
     </div> 
 
     <script src="script.js"></script>
-    <script src="fuel-manager.js"></script>
     <script src="debug-pannel.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="supabase-handler.js"></script>
+
+    <script src="fuel-manager.js"></script>
+
 </body>
 </html>
