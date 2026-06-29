@@ -11,18 +11,18 @@
     <div class="app-container"> 
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share™</span></h1> 
-            <h3 id="version-label" style="cursor: pointer;">versão: 0.0.15_ <span class="splash1">splash-5</span></h3>
-            <button class="profile-menu"><img src="../assets/icons/user-icon.jpg"></button>
+            <!--<h3 id="version-label" style="cursor: pointer;">v.15_ <span class="splash1">splash-5</span></h3>-->
+            <button class="profile-menu"><img src="perfil-fallback.jpg"></button>
         </div>
 
         <main class="main-content">
                                                                                                                                                                      
-            <div id="page-home" class="page un-active">
+            <div id="page-home" class="page active">
                 <h1><span id="greeting"></span>, <span id="user-name"></span>!</h1>
                 <p class="subtitulo"><span id="current-city">Pouso Alegre</span> — <span id="lastUpdated">15 min</span></p>
                 
 
-                <div class="fuel-hero">
+            <   <div class="fuel-hero">
                     <div class="card-top">
                         <span>⛽ </span>
                         <span class="fuel-type">GASOLINA COMUM</span>
@@ -30,7 +30,7 @@
                     
                     <div class="price-container">
                         <span class="currency">R$</span>
-                        <span class="fuel-price">6,32</span>
+                        <span class="fuel-price">0,00</span>
                         <span class="unit">/L</span>
                     </div>
 
@@ -38,7 +38,29 @@
                         <span id="price-trend-tool" class="price-trend up"></span>
                         <span id="low-price-local">🚗Shell Rodoviaria</span>
                     </div>
+                </div> 
+
+                <!------------------------------------------>
+
+                <div class="fuel-hero">
+                    <div class="card-top">
+                        <span>⛽ </span>
+                        <span class="fuel-type">GASOLINA RADIOATIVA</span>
+                    </div>
+                    
+                    <div class="price-container">
+                        <span class="currency">R$</span>
+                        <span class="fuel-recent">0,00</span>
+                        <span class="unit">/L</span>
+                    </div>
+
+                    <div class="card-bottom">
+                        <span id="price-trend-tool" class="price-trend up"></span>
+                        <span id="low-price-local">🚗POSTO MATEUS</span>
+                    </div>
                 </div>
+                
+                <!------------------------------------------>
 
                 <div class="TitleBox"><h2>Todos os combustíveis</h1></div>
                 
@@ -89,11 +111,11 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <p class="license">© 2026 Fuel Share™. All rights reserved.</p>
             </div>
 
-            <div id="page-valor" class="page active">
+            <div id="page-valor" class="page un-active">
                 <h1>Adicionar Preço</h1>
                 <p class="subtitulo">Compatilhe o preço de combustível.</p>
                 <br>

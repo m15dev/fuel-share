@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Se você não tiver um elemento com id="version-label" no HTML, o JS não vai quebrar!
     if (!versionLabel) {
-        console.warn("⚠️ Elemento #version-label não foi encontrado no HTML. O painel de debug não vai ativar.");
+        //console.warn("⚠️ Elemento #version-label não foi encontrado no HTML. O painel de debug não vai ativar.");
         return;
     }
 

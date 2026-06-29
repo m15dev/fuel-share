@@ -2,18 +2,20 @@
    Configuração de Temas do Fuel-Share
    ========================================================================== */
 
-/*TEMA 1 (PADRÃO): ESTILO CAFÉ */
-/*tema de café muito dahora hehehehehehehehehe*/
+/*TEMA 1 (PADRÃO):*/
 body, body.tema-1 {
-    --bg: #0A0A0A;               
-    --border: #1F1F1F;           
+    --fixed-box: #050505;
+    --bg: #121212;
+    --border: #262626;
     --text-logo: rgb(240, 118, 47);
-    --text-light: #FFFFFF;       
-    --text-muted: #666666;       
-    --card-bg: #121212;          
-    --card-border: #262626;      
-    --radius-main: 16px;
+    --text-light: #F0F0F0;
+    --text-muted: #A0A0A0;
+    --card-bg: #1C1C1C;
+    --card-border: #333333;
+    --active-border: #E67E22;
+    --radius-main: 12px;
 }
+
 /*  TEMA 2 - Preto AMOLED ideal (Spotify) */
 body, body.tema-2 {
     --bg: #121212;          
@@ -105,16 +107,16 @@ html, body {
    Header e Barra de Navegação
    ========================================================================== */
 .header {
-    padding: 16px 20px 12px;
+    padding: 15px 20px 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    background: var(--fixed-box);
+    border-bottom: 2px solid var(--text-logo);
     flex-shrink: 0;
 }
-h1 { font-size: 24px; color: var(--text-light); cursor: pointer; }
-h3 { font-size: 11px; color: #666666; }
+.header h1 { font-size: 30px; color: var(--text-light); cursor: pointer; }
+.header h3 { font-size: 11px; color: #666666; }
 
 .logo-animation { 
     display: inline-block; 
@@ -148,7 +150,7 @@ h3 { font-size: 11px; color: #666666; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--bg);
+    background: var(--fixed-box);
     border-top: 1px solid var(--border); 
     z-index: 9999;     
 }
@@ -162,9 +164,8 @@ h3 { font-size: 11px; color: #666666; }
     display: block; 
 }
 
-
 .subtitulo span {
-    color: inherit; 
+    color: var(--text-logo); 
 }
 
 .license {
@@ -173,21 +174,24 @@ h3 { font-size: 11px; color: #666666; }
     text-align: center;
     padding-top: 20px;
     flex-shrink: 0; 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 /* ==========================================================================
    Menu Perfil
    ========================================================================== */
 .profile-menu{
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     padding: 0;
     overflow: hidden;
+    box-sizing: border-box;
     border-radius: 100%;
-    border: 2px solid var(--border);
+    border: 2px solid var(--text-logo);
 }
 .profile-menu img{
+    background-image: url('perfil-fallback.jpg');
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -220,7 +224,7 @@ h3 { font-size: 11px; color: #666666; }
     background: var(--card-bg); 
     border: 1px solid var(--card-border); 
     border-radius: 16px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
+    box-shadow: 0 0 25px 10px rgba(240, 118, 47, 0.5); 
     display: flex;
     flex-direction: column;
 }
@@ -314,6 +318,8 @@ h3 { font-size: 11px; color: #666666; }
    Conteudo Fuel-News (Noticias em geral sobre combustivel)
    ========================================================================== */
 
+h1 { font-size: 24px; color: var(--text-light); cursor: pointer; }
+h3 { font-size: 11px; color: #666666; }
 
 h3, h2, h1, p{
     color: white;
@@ -441,3 +447,7 @@ h3, h2, h1, p{
     display: flex;
 }
 #btn-1{ margin: auto; font-size: 30px; background-color: var(--text-logo); border: none;}
+
+
+
+.fuel-hero .fuel-recent { font-size: 48px; font-weight: bold; color: var(--text-logo); }
