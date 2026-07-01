@@ -161,3 +161,29 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
+let newWorker;
+
+if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+    navigator.serviceWorker.register('/sw.js')
+    .then(reg => {
+        reg.addEventListener('updatefound', () => {
+            newWorker = reg.installing;
+            newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log("Nova versão disponível! Use forceUpdate() para atualizar.");
+                }
+            });
+        });
+    })
+    .catch(err => console.error("Erro no Service Worker:", err));
+}
+
+window.forceUpdate = function() {
+    if (!newWorker) {
+        console.log("Nenhuma atualização pendente encontrada.");
+        window.location.reload();
+        return;
+    }
+    newWorker.postMessage({ action: 'skipWaiting' });
+    window.location.reload();
+};

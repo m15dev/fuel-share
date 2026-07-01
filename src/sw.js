@@ -1,11 +1,19 @@
-const CACHE_NAME = 'fuel-share-v3'; 
+const CACHE_NAME = "fuel-share-v4";
 
 const ASSETS = [
-    './',
-    './index.html',
-    './main-style.css',
-    './script.js',
-    './manifest.json'
+    "/",
+    "/index.html",
+    "/main-style.css",
+
+    "/script.js",
+    "/constants.js",
+    "/fuel-manager.js",
+    "/supabase-handler.js",
+    "/debug-pannel.js",
+
+    "/manifest.json",
+
+    "/perfil-fallback.jpg"
 ];
 
 self.addEventListener('install', event => {
