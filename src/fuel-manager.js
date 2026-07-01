@@ -28,7 +28,6 @@ const price = parseFloat(
 
 
 //EXTRA EXTRA EXTRA EXTRA __ TESTE //
-
 navigator.geolocation.getCurrentPosition(async (position) => {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
@@ -46,24 +45,25 @@ navigator.geolocation.getCurrentPosition(async (position) => {
     `;
 
     try {
-    const response = await fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        body: query
-    });
+        const response = await fetch("https://overpass-api.de/api/interpreter", {
+            method: "POST",
+            body: query
+        });
 
-    if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Erro na API do Overpass: ${response.status} - ${text}`);
-    }
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(`Error: ${response.status} - ${text}`);
+        }
 
-    const data = await response.json();
+        const data = await response.json();
 
-    console.log("Nearby fuel stations:", data.elements);
+        data.elements.forEach((station) => {
+            const name = station.tags.name || "Unnamed Station";
+            console.log(`Station Name: ${name}`);
+            console.log("Full Details:", station);
+        });
+
     } catch (error) {
-        console.error("Erro ao buscar postos:", error);
+        console.error("Error fetching stations:", error);
     }
 });
-
-
-
-
