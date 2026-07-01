@@ -9,6 +9,22 @@ const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 window.supabaseClient = supabaseClient;
 
 console.log("🚀 Supabase Initialized with Realtime support!");
+console.log("reportPriceByName('Station Name', 9.99)");
+
+window.loginUser = async function(email, password) {
+    console.log("Tentando logar...");
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        console.error("🛑 Erro de login:", error.message);
+    } else {
+        console.log("✅ Logado com sucesso!", data.user.email);
+        updateDashboard(); 
+    }
+};
 
 // 1. CORE FUNCTION: SAVE PRICE
 async function saveFuelPrice(stationId, fuelType, priceValue) {
