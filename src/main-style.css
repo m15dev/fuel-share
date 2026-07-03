@@ -451,3 +451,35 @@ h3, h2, h1, p{
 
 
 .fuel-hero .fuel-recent { font-size: 48px; font-weight: bold; color: var(--text-logo); }
+
+
+#page-perfil {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--active-border);
+    border-radius: var(--radius-main);
+    box-sizing: border-box;
+    background: var(--card-bg); 
+    display: flex;
+
+    flex-direction: column;
+}
+
+.profile-header {
+    
+    width: 100%; 
+    height: 50px;
+    
+    display: flex;
+    flex-direction: column; 
+     
+    border: 1px solid var(--active-border);
+    border-radius: var(--radius-main);
+    align-items: center;    
+    justify-content: center;
+
+    color: rgb(25, 255, 4);
+}

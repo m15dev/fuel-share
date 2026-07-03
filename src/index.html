@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script> //console debug para celular
-    <script>eruda.init();</script>
-    -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,17 +11,14 @@
     <div class="app-container"> 
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share™</span></h1> 
-            <!--<h3 id="version-label" style="cursor: pointer;">v.15_ <span class="splash1">splash-5</span></h3>-->
             <button class="profile-menu"><img src="perfil-fallback.jpg"></button>
         </div>
 
         <main class="main-content">
-                                                                                                                                                                     
             <div id="page-home" class="page active">
                 <h1><span id="greeting"></span>, <span id="user-name"></span>!</h1>
                 <p class="subtitulo"><span id="current-city">Pouso Alegre</span> — <span id="lastUpdated">15 min</span></p>
                 
-
                 <div class="fuel-hero">
                     <div class="card-top">
                         <span>⛽ </span>
@@ -43,8 +36,6 @@
                         <span id="low-price-local">🚗Shell Rodoviaria</span>
                     </div>
                 </div> 
-
-                <!------------------------------------------>
 
                 <div class="fuel-hero">
                     <div class="card-top">
@@ -64,9 +55,7 @@
                     </div>
                 </div>
                 
-                <!------------------------------------------>
-
-                <div class="TitleBox"><h2>Todos os combustíveis</h1></div>
+                <div class="TitleBox"><h2>Todos os combustíveis</h2></div>
                 
                 <div class="fuel-grid">
                     <div class="fuel-card">
@@ -88,7 +77,6 @@
                         <div class="card-top"><span>🌿 </span> <span class="badge up">▲ +0.32</span></div>
                         <span class="fuel-type">%FUEL-TYPE%</span>
                     </div>
-
                 </div>
                     
                 <div class="TitleBox"><h1>Ultimas notícias</h1></div>
@@ -125,14 +113,12 @@
                 <br>
                 <p class="subtitulo">TIPO DE COMBUSTÍVEL</p>
 
-                <div class="fuel-pannel-grid"> <!--Botão de seleção preço-->                    
+                <div class="fuel-pannel-grid">                  
                     <div class="fuel-card fuel1"><h1>OPÇÃO 1</h1></div>
                     <div class="fuel-card fuel2"><h1>OPÇÃO 2</h1></div>
                     <div class="fuel-card fuel3"><h1>OPÇÃO 3</h1></div>
                     <div class="fuel-card fuel4"><h1>OPÇÃO 4</h1></div>
                 </div>
-
-                <!------------------------------------------------------------>
 
                 <p class="subtitulo">PREÇO POR LITRO</p>
                 <div class="price-input">
@@ -143,31 +129,32 @@
                 <p class="subtitulo">POSTO</p>
                 <div id="station-list">
                     <div class="price-input">
-                    <span id="cck-2" class="sub-subtitulo">SHELL CENTRO</span>
+                        <span id="cck-2" class="sub-subtitulo">SHELL CENTRO</span>
+                    </div>
                 </div>
 
                 <p class="subtitulo">OBSERVAÇÃO (OPCIONAL)</p>
                 <div id="extra-info-card">
                     <div class="extra-info">
-                    <input id="extra-info-input"  class="value-card" type="text" placeholder="Posto Lotado" inputmode="text">
+                        <input id="extra-info-input"  class="value-card" type="text" placeholder="Posto Lotado" inputmode="text">
+                    </div>
                 </div>
 
                 <div id="Push-Data">
                     <div class="Button-Default">
-                    <button id="btn-1">PUBLICAR PREÇO</button>
+                        <button id="btn-1">PUBLICAR PREÇO</button>
                     </div>
                 </div>
-
+            </div>
+            
             <div id="page-mapa" class="page">
+                <h3>PAGE MAPA</h3>
             </div>
 
-            <div id="page-perfil">
+            <div id="page-perfil" class="page">
                 <div class="profile-header">
-
                     <div>Profile Info</div>
-
                     <div>Profile Data</div>
-
                 </div>
             </div>
 
@@ -183,9 +170,9 @@
     <script src="script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    
     <script src="supabase-handler.js"></script>
-
+    
     <script src="fuel-manager.js"></script>
 
 </body>
