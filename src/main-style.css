@@ -16,7 +16,7 @@ body, body.tema-1 {
     --radius-main: 12px;
 }
 
-/*  TEMA 2 - Preto AMOLED ideal (Spotify) */
+/* TEMA 2 - Preto AMOLED ideal (Spotify) */
 body, body.tema-2 {
     --bg: #121212;          
     --card-bg: #1C1C1E;     
@@ -180,7 +180,7 @@ html, body {
 /* ==========================================================================
    Menu Perfil
    ========================================================================== */
-.profile-menu{
+.profile-menu-button{
     height: 40px;
     width: 40px;
     padding: 0;
@@ -188,6 +188,24 @@ html, body {
     box-sizing: border-box;
     border-radius: 100%;
     border: 2px solid var(--text-logo);
+}
+.profile-menu-button img{
+    background-image: url('perfil-fallback.jpg');
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ------------------------------------------------- */
+
+.profile-menu{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 100%;
 }
 .profile-menu img{
     background-image: url('perfil-fallback.jpg');
@@ -198,19 +216,46 @@ html, body {
     object-position: center;
 }
 
+/* ------------------------------------------------- */
+
+#page-perfil {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--active-border);
+    border-radius: var(--radius-main);
+    box-sizing: border-box;
+    background: var(--bg); 
+}
+
+.profile-header {
+    
+    width: 100px; 
+    height: 100px;
+    
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center;
+    color: rgb(25, 255, 4);
+
+}
+
 
 /* ==========================================================================
    Configuração de pagina ativa
    ========================================================================== */
-.page{
-    display: none;
-    margin-bottom: 10px;
+.page {
+    display: none !important;
+    width: 100%;
+    box-sizing: border-box;
 }
-
-.page.active{
-    display: block;
+.page.active {
+    display: flex !important;
+    flex-direction: column;
 }
-
 
 /* ==========================================================================
    Conteudo Fuel-Hero (Card Principal)
@@ -453,33 +498,3 @@ h3, h2, h1, p{
 .fuel-hero .fuel-recent { font-size: 48px; font-weight: bold; color: var(--text-logo); }
 
 
-#page-perfil {
-    width: 100%;
-    height: 200px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px solid var(--active-border);
-    border-radius: var(--radius-main);
-    box-sizing: border-box;
-    background: var(--card-bg); 
-    display: flex;
-
-    flex-direction: column;
-}
-
-.profile-header {
-    
-    width: 100%; 
-    height: 50px;
-    
-    display: flex;
-    flex-direction: column; 
-     
-    border: 1px solid var(--active-border);
-    border-radius: var(--radius-main);
-    align-items: center;    
-    justify-content: center;
-
-    color: rgb(25, 255, 4);
-}

@@ -2,30 +2,31 @@ const input = document.getElementById("fuel-price-input");
 const elemento = document.getElementById("cck-1");
 const elemento2 = document.getElementById("cck-2");
 
-input.addEventListener("input", () => {
-    let value = input.value.replace(/\D/g, "");
+if (input) {
+    input.addEventListener("input", () => {
+        let value = input.value.replace(/\D/g, "");
 
-    if (!value) {
-        input.value = "";
-        return;
+        if (!value) {
+            input.value = "";
+            return;
+        }
+
+        value = value.slice(0, 4);
+        value = (parseInt(value, 10) / 100).toFixed(2);
+        input.value = value.replace(".", ",");
+
+        if (elemento) elemento.style.color = "white";
+        if (elemento2) elemento2.style.color = "white";
+    });
+}
+
+// Coloque esta conversão dentro da sua função de clique do Supabase quando for salvar!
+function obterPrecoParaSupabase() {
+    if (input && input.value) {
+        return parseFloat(input.value.replace(",", "."));
     }
-
-    value = value.slice(0, 4);
-    value = (parseInt(value, 10) / 100).toFixed(2);
-    input.value = value.replace(".", ",");
-
-    elemento.style.color = "white";
-
-    elemento2.style.color = "white";
-  
-});
-
-
-//Converting it back to shove it up to supabase
-const price = parseFloat(
-    input.value.replace(",", ".")
-);
-
+    return 0;
+}
 
 //EXTRA EXTRA EXTRA EXTRA __ TESTE //
 navigator.geolocation.getCurrentPosition(async (position) => {

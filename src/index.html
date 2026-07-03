@@ -11,11 +11,11 @@
     <div class="app-container"> 
         <div class="header"> 
             <h1 onclick="window.location.reload()">Fuel<span class="logo-animation">Share™</span></h1> 
-            <button class="profile-menu"><img src="perfil-fallback.jpg"></button>
+            <button class="profile-menu-button"><img src="perfil-fallback.jpg"></button>
         </div>
 
         <main class="main-content">
-            <div id="page-home" class="page active">
+            <div id="page-home" class="page">
                 <h1><span id="greeting"></span>, <span id="user-name"></span>!</h1>
                 <p class="subtitulo"><span id="current-city">Pouso Alegre</span> — <span id="lastUpdated">15 min</span></p>
                 
@@ -50,8 +50,8 @@
                     </div>
 
                     <div class="card-bottom">
-                        <span id="price-trend-tool" class="price-trend up"></span>
-                        <span id="low-price-local">🚗POSTO MATEUS</span>
+                        <span id="price-trend-tool-recent" class="price-trend up"></span>
+                        <span id="low-price-local-recent">🚗POSTO MATEUS</span>
                     </div>
                 </div>
                 
@@ -107,7 +107,7 @@
                 <p class="license">© 2026 Fuel Share™. All rights reserved.</p>
             </div>
 
-            <div id="page-valor" class="page">
+            <div id="page-valor" class="page ">
                 <h1>Adicionar Preço</h1>
                 <p class="subtitulo">Compatilhe o preço de combustível.</p>
                 <br>
@@ -146,17 +146,19 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="page-mapa" class="page">
                 <h3>PAGE MAPA</h3>
             </div>
 
-            <div id="page-perfil" class="page">
+
+            <div id="page-perfil" class="page active">
                 <div class="profile-header">
-                    <div>Profile Info</div>
-                    <div>Profile Data</div>
+                    <img src="perfil-fallback.jpg" class="profile-menu">
                 </div>
             </div>
+
+            
 
         </main>
 
@@ -165,15 +167,12 @@
             <button class="act2">Adicionar</button>
             <button class="act3">Mapa</button>
         </nav>
+
     </div> 
 
     <script src="script.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <script src="supabase-handler.js"></script>
-    
     <script src="fuel-manager.js"></script>
-
 </body>
 </html>

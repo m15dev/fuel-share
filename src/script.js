@@ -88,7 +88,7 @@ function calcularTempoDecorrido(dataPostagem) {
 }
 
 // Data teste e execução do cálculo de tempo
-const dataDBlast = "2026-06-13T22:45:00"; // Mantido em 2026 conforme seu padrão
+const dataDBlast = "2026-07-01T22:45:00"; // P AAAA:MM:DD T HH:MM:SS  **Implement Supabase**
 const elementoTempo = document.getElementById("lastUpdated");
 
 if (elementoTempo) {
@@ -96,22 +96,23 @@ if (elementoTempo) {
 }
 
 // Teste das funções de preço
-updatePriceTrend(6.27, 6.39);
+updatePriceTrend(6.29, 6.49);
 
 
 // ==========================================================================
-// 📱 SISTEMA DE NAVEGAÇÃO (TROCA DE PÁGINAS)
+// SISTEMA DE NAVEGAÇÃO (TROCA DE PÁGINAS)
 // ==========================================================================
 
 const botaoHome = document.querySelector('.act1');
 const botaoValor = document.querySelector('.act2');
 const botaoMapa = document.querySelector('.act3');
-const botaoPerfil = document.querySelector('.profile-menu')
+const botaoPerfil = document.querySelector('.profile-menu');
+
 
 botaoHome.addEventListener('click', () => trocarPagina('page-home'));
 botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
 botaoMapa.addEventListener('click', () => trocarPagina('page-mapa'));
-botaoPerfil.addEventListener('click', () => trocarPagina('page-perfil'))
+botaoPerfil.addEventListener('click', () => trocarPagina('page-perfil'));
 
 function trocarPagina(idDaPaginaAlvo) {
     const todasAsPaginas = document.querySelectorAll('.page');
@@ -124,11 +125,16 @@ function trocarPagina(idDaPaginaAlvo) {
         paginaAlvo.classList.add('active');
     }
 
- 
+    // Remove o active dos botões da barra inferior
     const todosOsBotoes = document.querySelectorAll('.nav-bottom button');
     todosOsBotoes.forEach(botao => {
-        botao.removeAttribute('active'); // Tira o visual ativo dos outros
+        botao.removeAttribute('active'); //  Un activates the other menus 
     });
+    
+    // REMOVE O ACTIVE DO BOTÃO DE PERFIL TAMBÉM (Que está lá no Header)
+    if (botaoPerfil) {
+        botaoPerfil.removeAttribute('active');
+    }
     
     if (idDaPaginaAlvo === 'page-home') botaoHome.setAttribute('active', '');
     if (idDaPaginaAlvo === 'page-valor') botaoValor.setAttribute('active', '');
@@ -141,7 +147,7 @@ function trocarPagina(idDaPaginaAlvo) {
 // ⌨️ NAVEGAÇÃO POR TECLADO (SETAS ESQUERDA E DIREITA) - VERSÃO ADAPTADA
 // ==========================================================================
 
-const ordemPaginas = ['page-home', 'page-valor', 'page-mapa'];
+const ordemPaginas = ['page-home', 'page-valor', 'page-mapa', 'page-perfil'];
 
 window.addEventListener('keydown', (event) => {
     const paginaAtivaAtual = document.querySelector('.page.active');
