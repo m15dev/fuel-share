@@ -20,7 +20,6 @@ if (input) {
     });
 }
 
-// Coloque esta conversão dentro da sua função de clique do Supabase quando for salvar!
 function obterPrecoParaSupabase() {
     if (input && input.value) {
         return parseFloat(input.value.replace(",", "."));
