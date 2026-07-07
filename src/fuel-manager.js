@@ -1,6 +1,9 @@
 const input = document.getElementById("fuel-price-input");
 const elemento = document.getElementById("cck-1");
-const elemento2 = document.getElementById("cck-2");
+const elemento2 = document.getElementById("cck-2")
+
+let combustivelSelecionado = null;
+
 
 if (input) {
     input.addEventListener("input", () => {
@@ -67,3 +70,61 @@ navigator.geolocation.getCurrentPosition(async (position) => {
         console.error("Error fetching stations:", error);
     }
 });
+
+
+
+
+// ==========================================================================
+// FUEL PRICE SUBMISSION LOGIC
+// ==========================================================================
+
+let selectedFuelType = null;
+const fuelCards = document.querySelectorAll('.fuel-pannel-grid .fuel-card');
+const publishButton = document.getElementById('btn-1');
+
+fuelCards.forEach(card => {
+    card.addEventListener('click', () => {
+
+        fuelCards.forEach(c => c.style.border = 'none');
+        
+        card.style.border = '2px solid var(--text-logo)';
+
+        selectedFuelType = card.getAttribute('data-fuel');
+        console.log("Selected fuel type ID:", selectedFuelType);
+    });
+});
+
+if (publishButton) {
+    publishButton.addEventListener('click', async () => {
+        if (selectedFuelType === null) {
+            alert("Please, select a fuel type first!");
+            return;
+        }
+
+        const numericPrice = obterPrecoParaSupabase();
+        if (!numericPrice || numericPrice <= 0) {
+            alert("Please, enter a valid price!");
+            return;
+        }
+
+        const stationName = "POSTO BRASIL"; 
+
+        publishButton.innerText = "SENDING...";
+        publishButton.disabled = true;
+
+       await reportPriceByName(stationName, numericPrice);
+
+        console.log("Price successfully published in real-time!");
+        
+        document.getElementById("fuel-price-input").value = "";
+        fuelCards.forEach(c => c.style.border = 'none');
+        selectedFuelType = null;
+        
+        if (typeof trocarPagina === "function") {
+            trocarPagina('page-home');
+        }
+
+        publishButton.innerText = "PUBLISH PRICE";
+        publishButton.disabled = false;
+    });
+}
