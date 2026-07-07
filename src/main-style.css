@@ -186,7 +186,7 @@ html, body {
 .profile-menu-button img{display: block;width: 100%;height: 100%;object-fit: cover;object-position: center;}
 /* ------------------------------------------------- */
 
-#page-perfil {
+.perfil-page {
     width: 100%;
     border: 1px solid var(--active-border);
     border-radius: var(--radius-main);
@@ -224,7 +224,45 @@ html, body {
 }
 
 .profile-content{
-    height: 100px;
+    width: 100%;
+    padding: 10px;
+}
+
+
+
+
+
+.profile-logout:active{transform:scale(0.98); transition:all 0.2s; }
+.profile-logout{
+    margin-top: 20px;
+    height: 60px;
+    width: 100%;
+
+    border: 1px solid red;
+    background-color: rgb(182, 3, 3);
+    border-radius: var(--radius-main);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.statistics{
+    margin-top: 5px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap: 10px;
+    transition:all 0.2s;
+}
+
+.statistics .stat-card {
+    background:var(--card-bg);
+    height: 85px; 
+    border-radius:var(--radius-main);
+    border: 1px solid var(--border);
+    cursor:pointer;
+    transition:all 0.2s
 }
 
 
