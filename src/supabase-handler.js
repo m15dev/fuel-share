@@ -19,9 +19,9 @@ window.loginUser = async function(email, password) {
     });
 
     if (error) {
-        console.error("🛑 Erro de login:", error.message);
+        console.error("Login Error!:", error.message);
     } else {
-        console.log("✅ Logado com sucesso!", data.user.email);
+        console.log("Login Successfully!", data.user.email);
         updateDashboard(); 
     }
 };
@@ -44,7 +44,7 @@ async function saveFuelPrice(stationId, fuelType, priceValue) {
         console.log("🎉 Price saved successfully!");
         return data;
     } catch (error) {
-        console.error("🛑 Error saving:", error.message);
+        console.error("Error saving:", error.message);
     }
 }
 
@@ -58,7 +58,7 @@ async function reportPriceByName(stationName, priceValue) {
         .single();
 
     if (error || !data) {
-        console.error("🛑 Station not found!");
+        console.error("Station not found!");
         return;
     }
 
@@ -105,7 +105,7 @@ supabaseClient
   .channel('reports-channel')
   .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reports' }, 
       (payload) => {
-          console.log('⚡ Change detected, updating UI for everyone!');
+          console.log('Change detected, updating UI for everyone!');
           updateDashboard();
       }
   )
