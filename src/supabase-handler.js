@@ -8,7 +8,7 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 window.supabaseClient = supabaseClient;
 
-console.log("🚀 Supabase Initialized with Realtime support!");
+console.log(" ### Supabase Initialized ### Yaay");
 console.log("reportPriceByName('Station Name', 9.99)");
 
 window.loginUser = async function(email, password) {
@@ -66,9 +66,8 @@ async function reportPriceByName(stationName, priceValue) {
 }
 window.reportPriceByName = reportPriceByName;
 
-// 3. UI UPDATE LOGIC
 async function updateDashboard() {
-    console.log("🔄 Updating dashboard...");
+    console.log("Updating dashboard...");
 
     // Get Recent
     const { data: recent } = await supabaseClient
@@ -100,7 +99,7 @@ async function updateDashboard() {
     }
 }
 
-// 4. REALTIME LISTENER (Magic happens here)
+// 4. REALTIME LISTENER
 supabaseClient
   .channel('reports-channel')
   .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reports' }, 

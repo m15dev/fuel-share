@@ -30,7 +30,7 @@ function obterPrecoParaSupabase() {
     return 0;
 }
 
-//EXTRA EXTRA EXTRA EXTRA __ TESTE //
+//EXTRA EXTRA EXTRA EXTRA __ TESTE // NEED TO WORK ON HERE CUS SMT IT JUST GIVE A RAMDOM ERROR
 navigator.geolocation.getCurrentPosition(async (position) => {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
