@@ -1,0 +1,99 @@
+/* ==========================================================================
+   HOME PAGE
+   ========================================================================== */
+
+#page-home{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.fuel-news{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* ==========================================================================
+   ADD REPORT PAGE
+   ========================================================================== */
+
+#page-valor{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.fuel-pannel-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.fuel1,
+.fuel2,
+.fuel3,
+.fuel4{
+    width:100%;
+}
+
+#fuel-price-input{
+    width:100%;
+}
+
+#extra-info-input{
+    width:100%;
+    resize:none;
+}
+
+#Push-Data{
+    width:100%;
+    margin-top:10px;
+}
+
+/* ==========================================================================
+   MAP PAGE
+   ========================================================================== */
+
+#page-mapa{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+#station-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+/* ==========================================================================
+   PROFILE PAGE
+   ========================================================================== */
+
+#page-profile{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* ==========================================================================
+   SETTINGS PAGE
+   ========================================================================== */
+
+#page-settings{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* ==========================================================================
+   SPLASH SCREEN
+   ========================================================================== */
+
+#page-splash{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+}

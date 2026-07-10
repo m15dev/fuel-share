@@ -1,0 +1,190 @@
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: var(--bg);
+}
+
+
+
+/* ==========================================================================
+   Header e Barra de Navegação
+   ========================================================================== */
+.header {
+    padding: 15px 20px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--fixed-box);
+    border-bottom: 2px solid var(--text-logo);
+    flex-shrink: 0;
+}
+.header h1 { font-size: 30px; color: var(--text-light); cursor: pointer; }
+.header h3 { font-size: 11px; color: #666666; }
+
+.logo-animation { 
+    display: inline-block; 
+    animation: brilho-laranja 2s infinite alternate ease-in-out; 
+}
+
+@keyframes brilho-laranja {
+    0% { color: var(--text-logo); text-shadow: 0 0 0px rgba(240, 118, 47, 0); transform: scale(1); }
+    50% { color: rgb(255, 143, 78); }
+    100% { color: var(--text-logo); text-shadow: 0 0 12px rgba(240, 118, 47, 0.8), 0 0 20px rgba(240, 118, 47, 0.4); transform: scale(1.02); }
+}
+
+.splash1 { color: rgb(4, 163, 4); }
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+    min-height: 0;
+    -webkit-overflow-scrolling: touch; 
+    padding: 20px 20px 110px 20px;
+}
+
+.nav-bottom {
+    position: fixed; 
+    bottom: 0;         
+    left: 0;          
+    width: 100%;
+    padding: 12px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--fixed-box);
+    border-top: 1px solid var(--border); 
+    z-index: 9999;     
+}
+
+
+.subtitulo { 
+    color: #888888; 
+    font-size: 13px; 
+    margin-top: 5px;
+    margin-bottom: 0;
+    display: block; 
+}
+
+.subtitulo span {
+    color: var(--text-logo); 
+}
+
+.license {
+    font-family: monospace;
+    color: var(--text-logo);
+    text-align: center;
+    padding-top: 20px;
+    flex-shrink: 0; 
+    font-size: 12px;
+}
+
+/* ==========================================================================
+   Menu Perfil
+   ========================================================================== */
+
+/* ------------------------------------------------- */
+.profile-menu-button{height: 40px; width: 40px; padding: 0; overflow: hidden; box-sizing: border-box;border-radius: 100%;border: 2px solid var(--text-logo);}
+.profile-menu-button img{display: block;width: 100%;height: 100%;object-fit: cover;object-position: center;}
+/* ------------------------------------------------- */
+
+.perfil-page {
+    width: 100%;
+    border: 1px solid var(--active-border);
+    border-radius: var(--radius-main);
+    background: var(--bg); 
+    overflow: hidden;
+}
+
+.profile-header {
+    width: 100%;
+    padding: 20px;
+
+    background:  #242936;
+
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+
+    border-bottom: 1px solid var(--active-border);
+}
+
+.profile-menu{
+    height: 90px;
+    width: 90px;
+
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: 2px solid var(--text-logo);
+}
+.profile-menu img { display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-content{
+    width: 100%;
+    padding: 10px;
+}
+
+
+
+
+
+.profile-logout:active{transform:scale(0.98); transition:all 0.2s; }
+.profile-logout{
+    margin-top: 20px;
+    height: 60px;
+    width: 100%;
+
+    border: 1px solid red;
+    background-color: rgb(182, 3, 3);
+    border-radius: var(--radius-main);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.statistics{
+    margin-top: 5px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap: 10px;
+    transition:all 0.2s;
+}
+
+.statistics .stat-card {
+    background:var(--card-bg);
+    height: 85px; 
+    border-radius:var(--radius-main);
+    border: 1px solid var(--border);
+    cursor:pointer;
+    transition:all 0.2s
+}
+
+
+/* ==========================================================================
+   Configuração de pagina ativa
+   ========================================================================== */
+.page {
+    display: none !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+.page.active {
+    display: flex !important;
+    flex-direction: column;
+}

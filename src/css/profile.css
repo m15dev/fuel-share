@@ -1,0 +1,143 @@
+/* ==========================================================================
+   PROFILE
+   ========================================================================== */
+
+/* ------------------------------------------
+   Profile Menu Button
+------------------------------------------ */
+
+.profile-menu-button{
+    cursor:pointer;
+}
+
+/* ------------------------------------------
+   Profile Page
+------------------------------------------ */
+
+.profile-page{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* ------------------------------------------
+   Profile Header
+------------------------------------------ */
+
+.profile-header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.profile-header img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:50%;
+    border:2px solid var(--text-logo);
+}
+
+.profile-header .profile-info{
+    display:flex;
+    flex-direction:column;
+}
+
+.profile-header .profile-info h2{
+    margin:0;
+}
+
+.profile-header .profile-info p{
+    color:var(--text-muted);
+    font-size:14px;
+}
+
+/* ------------------------------------------
+   Profile Content
+------------------------------------------ */
+
+.profile-content{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* ------------------------------------------
+   Statistics
+------------------------------------------ */
+
+.statistics{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.statistics .stat-card{
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius-main);
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.statistics .stat-card h2{
+    color:var(--text-logo);
+    font-size:24px;
+    margin-bottom:6px;
+}
+
+.statistics .stat-card p{
+    color:var(--text-muted);
+    text-align:center;
+    font-size:13px;
+}
+
+/* ------------------------------------------
+   Menu Buttons
+------------------------------------------ */
+
+.profile-menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.profile-menu button{
+    width:100%;
+    height:50px;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius-main);
+    color:var(--text-light);
+    font-size:15px;
+    transition:.2s;
+}
+
+.profile-menu button:hover{
+    border-color:var(--text-logo);
+}
+
+/* ------------------------------------------
+   Logout
+------------------------------------------ */
+
+.profile-logout{
+    margin-top:10px;
+}
+
+.profile-logout button{
+    width:100%;
+    height:50px;
+    border:none;
+    cursor:pointer;
+    border-radius:var(--radius-main);
+    background:#b62020;
+    color:white;
+    font-size:15px;
+}

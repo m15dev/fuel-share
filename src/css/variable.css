@@ -1,0 +1,61 @@
+/* ==========================================================================
+   THEMES
+   ========================================================================== */
+
+/*TEMA 1 (PADRÃO):*/
+body, body.tema-1 {
+    --fixed-box: #050505;
+    --bg: #121212;
+    --border: #262626;
+    --text-logo: rgb(240, 118, 47);
+    --text-light: #F0F0F0;
+    --text-muted: #A0A0A0;
+    --card-bg: #1C1C1C;
+    --card-border: #333333;
+    --active-border: #E67E22;
+    --radius-main: 12px;
+}
+
+/* THEME 2 - like Spotify*/
+body, body.tema-2 {
+    --bg: #121212;          
+    --card-bg: #1C1C1E;     
+    --border: #242426;           
+    --text-logo: rgb(240, 118, 47);
+    --text-light: #FFFFFF;       
+    --text-muted: #8E8E93;       
+    --card-border: #2C2C2E;      
+    --radius-main: 16px;
+}
+/* TEMA 3: like Instagram */
+body.tema-3 {
+    --bg: #0C0F14;               
+    --border: #1E232B;           
+    --text-logo: rgb(240, 118, 47);
+    --text-light: #F5F7FA;       
+    --text-muted: #71767F;       
+    --card-bg: #161A22;          
+    --card-border: #222731;      
+    --radius-main: 16px;
+}
+
+/* THEME 4  Yeah huu, maybe sm1 likes it*/
+body.tema-4 {
+    --bg: #0C0F14;               
+    --border: rgba(255, 255, 255, 0.08);           
+    --text-logo: rgb(240, 118, 47);
+    --text-light: aliceblue;       
+    --text-muted: #888894;       
+    --card-bg: rgba(255, 255, 255, 0.03); 
+    --card-border: rgba(255, 255, 255, 0.07);    
+    --radius-main: 16px;
+}
+/* THEME 5 WHITE *AAAAAH MY EEEEYEEs */
+body.tema-1-L {
+    --bg: #f5f5fa;                    
+    --border: #e0e0e6;                
+    --text-logo: rgb(210, 88, 17);  
+    --text-light: #1a1a1a;        
+    --card-bg: #ffffff;
+    --card-border: #e0e0e6;
+}

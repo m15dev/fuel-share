@@ -1,20 +1,21 @@
-const CACHE_NAME = "fuel-share-v4";
+const CACHE_NAME = "fuel-share-v5";
 
 const ASSETS = [
     "/",
     "/index.html",
-    "/main-style.css",
+    "/css/main.css",
 
-    "/script.js",
-    "/constants.js",
-    "/fuel-manager.js",
-    "/supabase-handler.js",
-    "/debug-pannel.js",
+    "/js/app.js",
+    "/js/fuel-manager.js",
+    "/js/database.js",
+    "/js/debug.js",
+    "/js/constants.js",
 
     "/manifest.json",
 
     "/perfil-fallback.jpg"
 ];
+
 
 self.addEventListener('install', event => {
     event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));

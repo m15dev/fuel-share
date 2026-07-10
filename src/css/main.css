@@ -1,0 +1,10 @@
+@import url("./variables.css");
+@import url("./defaults.css");
+@import url("./layout.css");
+@import url("./typography.css");
+@import url("./components.css");
+@import url("./profile.css");
+@import url("./pages.css");
+@import url("./animations.css");
+
+/*I did this because it was getting hard to manage where I was working at */

@@ -1,0 +1,88 @@
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+.header h1{
+    font-size:30px;
+    color:var(--text-light);
+    cursor:pointer;
+}
+
+.header h3{
+    font-size:11px;
+    color:#666;
+}
+
+h1{
+    font-size:24px;
+}
+
+h2{}
+
+h3{
+    font-size:11px;
+    color:#666;
+}
+
+h1,
+h2,
+h3,
+p{
+    color:var(--text-light);
+}
+
+.subtitulo{
+    color:#888;
+    font-size:13px;
+    margin-top:5px;
+    display:block;
+}
+
+.subtitulo span{
+    color:var(--text-logo);
+}
+
+.sub-subtitulo{
+    color:#888;
+    padding:0 10px;
+    font-size:30px;
+}
+
+.license{
+    color:var(--text-logo);
+    text-align:center;
+    padding-top:20px;
+    flex-shrink:0;
+    font-size:12px;
+}
+
+.splash1{
+    color:rgb(4,163,4);
+}
+
+.logo-animation{
+    display:inline-block;
+    animation:brilho-laranja 2s infinite alternate ease-in-out;
+}
+
+@keyframes brilho-laranja{
+
+0%{
+color:var(--text-logo);
+text-shadow:0 0 0 rgba(240,118,47,0);
+transform:scale(1);
+}
+
+50%{
+color:rgb(255,143,78);
+}
+
+100%{
+color:var(--text-logo);
+text-shadow:
+0 0 12px rgba(240,118,47,.8),
+0 0 20px rgba(240,118,47,.4);
+transform:scale(1.02);
+}
+
+}
