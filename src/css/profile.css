@@ -1,143 +1,77 @@
 /* ==========================================================================
-   PROFILE
+   Menu Perfil
    ========================================================================== */
 
-/* ------------------------------------------
-   Profile Menu Button
------------------------------------------- */
+/* ------------------------------------------------- */
+.profile-menu-button { height: 40px; width: 40px; padding: 0; overflow: hidden; box-sizing: border-box; border-radius: 100%; border: 2px solid var(--text-logo); }
+.profile-menu-button img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* ------------------------------------------------- */
 
-.profile-menu-button{
-    cursor:pointer;
+.perfil-page {
+    width: 100%;
+    border: 1px solid var(--active-border);
+    border-radius: var(--radius-main);
+    background: var(--bg); 
+    overflow: hidden;
 }
 
-/* ------------------------------------------
-   Profile Page
------------------------------------------- */
-
-.profile-page{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+.profile-header {
+    width: 100%;
+    padding: 20px;
+    background: #242936;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    border-bottom: 1px solid var(--active-border);
 }
 
-/* ------------------------------------------
-   Profile Header
------------------------------------------- */
-
-.profile-header{
-    display:flex;
-    align-items:center;
-    gap:16px;
+.profile-menu {
+    height: 90px;
+    width: 90px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: 2px solid var(--text-logo);
+}
+.profile-menu img { 
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
-.profile-header img{
-    width:80px;
-    height:80px;
-    object-fit:cover;
-    border-radius:50%;
-    border:2px solid var(--text-logo);
+.profile-content {
+    width: 100%;
+    padding: 10px;
 }
 
-.profile-header .profile-info{
-    display:flex;
-    flex-direction:column;
+.profile-logout:active { transform: scale(0.98); transition: all 0.2s; }
+.profile-logout {
+    margin-top: 20px;
+    height: 60px;
+    width: 100%;
+    border: 1px solid red;
+    background-color: rgb(182, 3, 3);
+    border-radius: var(--radius-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.profile-header .profile-info h2{
-    margin:0;
+.statistics {
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    transition: all 0.2s;
 }
 
-.profile-header .profile-info p{
-    color:var(--text-muted);
-    font-size:14px;
-}
-
-/* ------------------------------------------
-   Profile Content
------------------------------------------- */
-
-.profile-content{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-/* ------------------------------------------
-   Statistics
------------------------------------------- */
-
-.statistics{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.statistics .stat-card{
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:var(--radius-main);
-    padding:16px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-}
-
-.statistics .stat-card h2{
-    color:var(--text-logo);
-    font-size:24px;
-    margin-bottom:6px;
-}
-
-.statistics .stat-card p{
-    color:var(--text-muted);
-    text-align:center;
-    font-size:13px;
-}
-
-/* ------------------------------------------
-   Menu Buttons
------------------------------------------- */
-
-.profile-menu{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.profile-menu button{
-    width:100%;
-    height:50px;
-    border:none;
-    outline:none;
-    cursor:pointer;
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:var(--radius-main);
-    color:var(--text-light);
-    font-size:15px;
-    transition:.2s;
-}
-
-.profile-menu button:hover{
-    border-color:var(--text-logo);
-}
-
-/* ------------------------------------------
-   Logout
------------------------------------------- */
-
-.profile-logout{
-    margin-top:10px;
-}
-
-.profile-logout button{
-    width:100%;
-    height:50px;
-    border:none;
-    cursor:pointer;
-    border-radius:var(--radius-main);
-    background:#b62020;
-    color:white;
-    font-size:15px;
+.statistics .stat-card {
+    background: var(--card-bg);
+    height: 85px; 
+    border-radius: var(--radius-main);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
 }
