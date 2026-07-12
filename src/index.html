@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-            <div id="page-mapa=" class="page">
+            <div id="page-mapa" class="page">
                 <canvas id="page-map-canvas">
                     <div>this is for the map view</div>
                 </canvas>
@@ -156,46 +156,62 @@
 
             <div id="page-perfil" class="page">
                 <div class="perfil-page">
-                    <div class="profile-header">
-                    
-                        <div class="profile-menu">
-                            <img src="perfil-fallback.jpg">
+                    <!-- se if the user is not logged in this proffile shows-->
+                    <div id="login-container" style="padding: 20px;">
+                        <div class="TitleBox">
+                            <h1>Acessar Conta</h1>
+                            <p class="subtitulo">Faça login para publicar preços e acumular pontos</p>
                         </div>
-                        <h2>Mateus</h2>
-                        <h3>temporary-fix ;/</h3>
-                        <h3>loginUser("user@domain.com", "password")</h3>
-                    </div>
-
-                    <div class="profile-content">
-                        <div class="statistics">
-                            <div class="stat-card">
-                                <p>Preços Registrados: 5</p>
-                            </div>
-                            <div class="stat-card">
-                                <p>Postos Visitados: 3</p>
-                            </div>
-                            <div class="stat-card">
-                                <p> Alguma Informação: 1</p>
-                            </div>
-                            <div class="stat-card">
-                                <p>Alguma Informação: 2</p>
-                            </div>
+                        
+                        <div class="price-input" style="margin-bottom: 15px;">
+                            <input type="email" id="login-email" class="value-card" placeholder="Digite seu e-mail" style="padding: 0 15px; font-size: 16px;">
+                        </div>
+                        
+                        <div class="price-input" style="margin-bottom: 20px;">
+                            <input type="password" id="login-password" class="value-card" placeholder="Digite sua senha" style="padding: 0 15px; font-size: 16px;">
+                        </div>
+                        
+                        <div class="Button-Default" id="btn-login-trigger" style="cursor: pointer;">
+                            <button id="btn-login-text" style="margin: auto; font-size: 20px; background: none; border: none; color: white; font-weight: bold; cursor: pointer;">ENTRAR</button>
                         </div>
                     </div>
 
-                    <div class="themes"> 
-                        <div class="theme-card" data-theme="tema-1">
-                            <button class="theme-button"></button>
+                    <!-- e if the user is logged in this proffile shows  -->
+                    <div id="profile-logged-container" style="display: none;">
+                        <div class="profile-header">
+                            <div class="profile-menu">
+                                <img src="assets/logos/fox-logo.png" alt="Avatar">
+                            </div>
+                            <h1 id="user-display-name" style="margin-top: 10px;">Motorista</h1>
                         </div>
+                        <div class="profile-content">
+                            
+                            <div class="profile-content">
+                                <div class="statistics">
+                                    <div class="stat-card">
+                                        <p>Preços Registrados: 5</p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <p>Postos Visitados: 3</p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <p> Alguma Informação: 1</p>
+                                    </div>                                       
+                                    <div class="stat-card">
+                                          <p>Alguma Informação: 2</p>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="themes"> 
+                                <div class="theme-card" data-theme="tema-1">
+                                    <button class="theme-button"></button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-
-                    
                 </div>
-
-                <button class="profile-logout">
-                    <h1>SAIR</h1>
-                </button>
             </div>
 
         </main>
@@ -208,11 +224,11 @@
 
     </div> 
 
-    <script src="app.js"></script> <!--Renamed cus calling it script it's  uneasy-->>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/app.js"></script>
+    
 
     <script src="js/fuel-manager.js"></script>
-    <script src="js/database.js"></script>
     <script src="js/debug.js"></script>
     <script src="js/constants.js"></script>
 

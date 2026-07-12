@@ -1,9 +1,8 @@
 const input = document.getElementById("fuel-price-input");
 const elemento = document.getElementById("cck-1");
-const elemento2 = document.getElementById("cck-2")
+const elemento2 = document.getElementById("cck-2");
 
 let combustivelSelecionado = null;
-
 
 if (input) {
     input.addEventListener("input", () => {
@@ -30,7 +29,9 @@ function obterPrecoParaSupabase() {
     return 0;
 }
 
-//EXTRA EXTRA EXTRA EXTRA __ TESTE // NEED TO WORK ON HERE CUS SMT IT JUST GIVE A RAMDOM ERROR
+// ==========================================================================
+// 🗺️ SISTEMA GEOLOCATION + OVERPASS API (BLINDADO CONTRA TIMEOUT/504)
+// ==========================================================================
 navigator.geolocation.getCurrentPosition(async (position) => {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
@@ -38,7 +39,7 @@ navigator.geolocation.getCurrentPosition(async (position) => {
     console.log(`Location: ${lat}, ${lon}`);
 
     const query = `
-        [out:json];
+        [out:json][timeout:15];
         (
             node["amenity"="fuel"](around:10000,${lat},${lon});
             way["amenity"="fuel"](around:10000,${lat},${lon});
@@ -47,48 +48,57 @@ navigator.geolocation.getCurrentPosition(async (position) => {
         out center;
     `;
 
+    // Criamos um controlador para abortar se a API deles demorar demais
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000); // 6 segundos de tolerância
+
     try {
         const response = await fetch("https://overpass-api.de/api/interpreter", {
             method: "POST",
-            body: query
+            body: query,
+            signal: controller.signal // Vincula o sinal de abortar ao fetch
         });
+
+        clearTimeout(timeoutId); // Respondeu a tempo? Cancela o cronômetro de abortar
 
         if (!response.ok) {
             const text = await response.text();
-            throw new Error(`Error: ${response.status} - ${text}`);
+            throw new Error(`Erro no servidor de postos (Status ${response.status})`);
         }
 
         const data = await response.json();
 
-        data.elements.forEach((station) => {
-            const name = station.tags.name || "Unnamed Station";
-            console.log(`Station Name: ${name}`);
-            console.log("Full Details:", station);
-        });
+        if (data && data.elements) {
+            data.elements.forEach((station) => {
+                const name = station.tags.name || "Posto sem Nome";
+                console.log(`Station Name: ${name}`);
+            });
+        }
 
     } catch (error) {
-        console.error("Error fetching stations:", error);
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+            console.warn("⚠️ O servidor da Overpass demorou demais para responder (Timeout de 6s).");
+        } else {
+            console.error("❌ Erro ao buscar postos:", error.message);
+        }
+        // Aqui você pode colocar uma lógica para carregar postos padrão do banco de dados caso falte a API externa
     }
+}, (geoError) => {
+    console.error("Erro ao obter geolocalização do dispositivo:", geoError);
 });
-
-
-
 
 // ==========================================================================
 // FUEL PRICE SUBMISSION LOGIC
 // ==========================================================================
-
 let selectedFuelType = null;
 const fuelCards = document.querySelectorAll('.fuel-pannel-grid .fuel-card');
 const publishButton = document.getElementById('btn-1');
 
 fuelCards.forEach(card => {
     card.addEventListener('click', () => {
-
         fuelCards.forEach(c => c.style.border = 'none');
-        
         card.style.border = '2px solid var(--text-logo)';
-
         selectedFuelType = card.getAttribute('data-fuel');
         console.log("Selected fuel type ID:", selectedFuelType);
     });
@@ -112,19 +122,23 @@ if (publishButton) {
         publishButton.innerText = "SENDING...";
         publishButton.disabled = true;
 
-       await reportPriceByName(stationName, numericPrice);
-
-        console.log("Price successfully published in real-time!");
-        
-        document.getElementById("fuel-price-input").value = "";
-        fuelCards.forEach(c => c.style.border = 'none');
-        selectedFuelType = null;
-        
-        if (typeof trocarPagina === "function") {
-            trocarPagina('page-home');
+        try {
+            await reportPriceByName(stationName, numericPrice);
+            console.log("Price successfully published in real-time!");
+            
+            document.getElementById("fuel-price-input").value = "";
+            fuelCards.forEach(c => c.style.border = 'none');
+            selectedFuelType = null;
+            
+            if (typeof trocarPagina === "function") {
+                trocarPagina('page-home');
+            }
+        } catch (err) {
+            console.error("Erro ao enviar preço para o Supabase:", err);
+            alert("Erro ao publicar preço. Verifique sua conexão.");
+        } finally {
+            publishButton.innerText = "PUBLISH PRICE";
+            publishButton.disabled = false;
         }
-
-        publishButton.innerText = "PUBLISH PRICE";
-        publishButton.disabled = false;
     });
 }
