@@ -2,6 +2,74 @@ import { supabaseClient } from './js/database.js';
 import { loginUser, logoutUser, getCurrentUser } from './js/auth.js';
 
 // ==========================================================================
+// SISTEMA DE NAVEGAÇÃO (TROCA DE PÁGINAS)
+// ==========================================================================
+
+const botaoHome = document.querySelector('.act1');
+const botaoValor = document.querySelector('.act2');
+const botaoMapa = document.querySelector('.act3');
+const botaoPerfil = document.querySelector('.profile-menu');
+
+
+botaoHome.addEventListener('click', () => trocarPagina('page-home'));
+botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
+botaoMapa.addEventListener('click', () => trocarPagina('page-mapa'));
+botaoPerfil.addEventListener('click', () => trocarPagina('page-perfil'));
+
+function trocarPagina(idDaPaginaAlvo) {
+    const todasAsPaginas = document.querySelectorAll('.page');
+    todasAsPaginas.forEach(pagina => {
+        pagina.classList.remove('active');
+    });
+
+    const paginaAlvo = document.getElementById(idDaPaginaAlvo);
+    if (paginaAlvo) {
+        paginaAlvo.classList.add('active');
+    }
+
+    // Remove o active dos botões da barra inferior
+    const todosOsBotoes = document.querySelectorAll('.nav-bottom button');
+    todosOsBotoes.forEach(botao => {
+        botao.removeAttribute('active'); //  Un activates the other menus 
+    });
+    
+    // REMOVE O ACTIVE DO BOTÃO DE PERFIL TAMBÉM (Que está lá no Header)
+    if (botaoPerfil) {
+        botaoPerfil.removeAttribute('active');
+    }
+    
+    if (idDaPaginaAlvo === 'page-home') botaoHome.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-valor') botaoValor.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-mapa') botaoMapa.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-perfil') botaoPerfil.setAttribute('active', '');
+}
+
+
+// ==========================================================================
+// ⌨️ NAVEGAÇÃO POR TECLADO (SETAS ESQUERDA E DIREITA) - VERSÃO ADAPTADA
+// ==========================================================================
+
+const ordemPaginas = ['page-home', 'page-valor', 'page-mapa', 'page-perfil'];
+
+window.addEventListener('keydown', (event) => {
+    const paginaAtivaAtual = document.querySelector('.page.active');
+    if (!paginaAtivaAtual) return;
+
+    const idAtual = paginaAtivaAtual.id;
+    
+    let indiceAtual = ordemPaginas.indexOf(idAtual);
+
+    if (event.key === 'ArrowRight') {
+        let proximoIndice = (indiceAtual + 1) % ordemPaginas.length;
+        trocarPagina(ordemPaginas[proximoIndice]);
+    } 
+    else if (event.key === 'ArrowLeft') {
+        let indiceAnterior = (indiceAtual - 1 + ordemPaginas.length) % ordemPaginas.length;
+        trocarPagina(ordemPaginas[indiceAnterior]);
+    }
+});
+
+// ==========================================================================
 // SERVICE WORKER
 // ==========================================================================
 let newWorker;
@@ -104,31 +172,6 @@ function updateAuthUI(user) {
 }
 
 // ==========================================================================
-// FUNÇÃO DE TROCA DE PÁGINAS (Totalmente livre e independente)
-// ==========================================================================
-function trocarPagina(idDaPaginaAlvo) {
-    // 1. Alterna a visibilidade das seções (.page)
-    const todasAsPaginas = document.querySelectorAll('.page');
-    todasAsPaginas.forEach(pagina => {
-        pagina.classList.remove('active');
-    });
-
-    const paginaAlvo = document.getElementById(idDaPaginaAlvo);
-    if (paginaAlvo) {
-        paginaAlvo.classList.add('active');
-    }
-
-    // 2. Limpa o estado visual de todos os botões que possam ter o atributo active
-    document.querySelectorAll('[active]').forEach(el => el.removeAttribute('active'));
-    
-    // 3. Aplica o destaque no botão correto baseado na página aberta
-    if (idDaPaginaAlvo === 'page-home') document.querySelector('.act1')?.setAttribute('active', '');
-    if (idDaPaginaAlvo === 'page-valor') document.querySelector('.act2')?.setAttribute('active', '');
-    if (idDaPaginaAlvo === 'page-mapa') document.querySelector('.act3')?.setAttribute('active', '');
-    if (idDaPaginaAlvo === 'page-perfil') document.querySelector('.profile-menu-button')?.setAttribute('active', '');
-}
-
-// ==========================================================================
 // 🏁 INICIALIZAÇÃO DO DOM
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', async () => {
@@ -170,12 +213,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.warn("Elemento de tendência não encontrado na view atual.");
     }
 
-    // 4. Atribuição dos cliques de navegação
-    document.querySelector('.act1')?.addEventListener('click', () => trocarPagina('page-home'));
-    document.querySelector('.act2')?.addEventListener('click', () => trocarPagina('page-valor'));
-    document.querySelector('.act3')?.addEventListener('click', () => trocarPagina('page-mapa'));
-    document.querySelector('.profile-menu-button')?.addEventListener('click', () => trocarPagina('page-perfil'));
-
     // 5. Gatilho do Botão de Login
     const btnLoginTrigger = document.getElementById('btn-login-trigger');
     if (btnLoginTrigger) {
@@ -197,10 +234,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             try {
                 if (btnText) btnText.innerText = "CONECTANDO...";
                 const user = await loginUser(email, password);
-                alert("✅ Logado com sucesso!");
+                console.log("Logado com sucesso!");
                 updateAuthUI(user);
             } catch (error) {
-                alert("🛑 Erro ao entrar: " + error.message);
+                console.log("Erro ao entrar: " + error.message);
             } finally {
                 if (btnText) btnText.innerText = "ENTRAR";
             }
@@ -216,27 +253,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// ==========================================================================
-// ⌨️ NAVEGAÇÃO POR SETAS (Baseada diretamente nas funções de troca)
-// ==========================================================================
-const ordemPaginas = ['page-home', 'page-valor', 'page-mapa', 'page-perfil'];
-
-window.addEventListener('keydown', (event) => {
-    const paginaAtivaAtual = document.querySelector('.page.active');
-    if (!paginaAtivaAtual) return;
-
-    const idAtual = paginaAtivaAtual.id;
-    let indiceAtual = ordemPaginas.indexOf(idAtual);
-
-    if (event.key === 'ArrowRight') {
-        let proximoIndice = (indiceAtual + 1) % ordemPaginas.length;
-        trocarPagina(ordemPaginas[proximoIndice]);
-    } 
-    else if (event.key === 'ArrowLeft') {
-        let indiceAnterior = (indiceAtual - 1 + ordemPaginas.length) % ordemPaginas.length;
-        trocarPagina(ordemPaginas[indiceAnterior]);
-    }
-});
 
 // Monitoramento em tempo real do status de login
 supabaseClient.auth.onAuthStateChange((event, session) => {
