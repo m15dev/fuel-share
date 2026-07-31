@@ -250,6 +250,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateAuthUI(user);
     } catch (e) {
         console.log("Nenhum usuário logado inicialmente.");
+        console.log("Reconecte-se e tente novamente");
     }
 });
 
