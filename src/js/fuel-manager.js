@@ -1,8 +1,11 @@
+import { supabaseClient } from './database.js';
+
+// ==========================================================================
+// 1. DADOS DE ENTRADA & MASKING
+// ==========================================================================
 const input = document.getElementById("fuel-price-input");
 const elemento = document.getElementById("cck-1");
 const elemento2 = document.getElementById("cck-2");
-
-let combustivelSelecionado = null;
 
 if (input) {
     input.addEventListener("input", () => {
@@ -30,7 +33,31 @@ function obterPrecoParaSupabase() {
 }
 
 // ==========================================================================
-// 🗺️ SISTEMA GEOLOCATION + OVERPASS API (BLINDADO CONTRA TIMEOUT/504)
+// 2. FUNÇÃO DE ENVIO PARA O SUPABASE (TABELA 'reports')
+// ==========================================================================
+export async function reportPriceByName(stationId, preco, tipoCombustivel) {
+    // Garantindo tipos de dados numéricos para o banco
+    const fuelTypeInt = parseInt(tipoCombustivel, 10) || 1;
+
+    const { data, error } = await supabaseClient
+        .from('reports') 
+        .insert([
+            { 
+                price: preco,                 // numeric
+                fuel_type: fuelTypeInt,       // int2
+                station_id: stationId         // uuid (ou null se ainda não tiver vincular posto)
+            }
+        ]);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data;
+}
+
+// ==========================================================================
+// 3. GEOLOCALIZAÇÃO + OVERPASS API
 // ==========================================================================
 navigator.geolocation.getCurrentPosition(async (position) => {
     const lat = position.coords.latitude;
@@ -48,21 +75,19 @@ navigator.geolocation.getCurrentPosition(async (position) => {
         out center;
     `;
 
-    // Criamos um controlador para abortar se a API deles demorar demais
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000); // 6 segundos de tolerância
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
 
     try {
         const response = await fetch("https://overpass-api.de/api/interpreter", {
             method: "POST",
             body: query,
-            signal: controller.signal // Vincula o sinal de abortar ao fetch
+            signal: controller.signal
         });
 
-        clearTimeout(timeoutId); // Respondeu a tempo? Cancela o cronômetro de abortar
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
-            const text = await response.text();
             throw new Error(`Erro no servidor de postos (Status ${response.status})`);
         }
 
@@ -82,14 +107,13 @@ navigator.geolocation.getCurrentPosition(async (position) => {
         } else {
             console.error("❌ Erro ao buscar postos:", error.message);
         }
-        // Aqui você pode colocar uma lógica para carregar postos padrão do banco de dados caso falte a API externa
     }
 }, (geoError) => {
     console.error("Erro ao obter geolocalização do dispositivo:", geoError);
 });
 
 // ==========================================================================
-// FUEL PRICE SUBMISSION LOGIC
+// 4. LÓGICA DE SELEÇÃO E SUBMISSÃO DE PREÇO
 // ==========================================================================
 let selectedFuelType = null;
 const fuelCards = document.querySelectorAll('.fuel-pannel-grid .fuel-card');
@@ -117,13 +141,14 @@ if (publishButton) {
             return;
         }
 
-        const stationName = "POSTO BRASIL"; 
+        // UUID temporário de teste ou ID do posto retornado pela busca (tabela 'stations')
+        const dummyStationId = null; 
 
         publishButton.innerText = "SENDING...";
         publishButton.disabled = true;
 
         try {
-            await reportPriceByName(stationName, numericPrice);
+            await reportPriceByName(dummyStationId, numericPrice, selectedFuelType);
             console.log("Price successfully published in real-time!");
             
             document.getElementById("fuel-price-input").value = "";
@@ -135,7 +160,7 @@ if (publishButton) {
             }
         } catch (err) {
             console.error("Erro ao enviar preço para o Supabase:", err);
-            alert("Erro ao publicar preço. Verifique sua conexão.");
+            alert("Erro ao publicar preço: " + err.message);
         } finally {
             publishButton.innerText = "PUBLISH PRICE";
             publishButton.disabled = false;
