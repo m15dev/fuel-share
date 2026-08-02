@@ -162,7 +162,7 @@ if (publishButton) {
             console.error("Erro ao enviar preço para o Supabase:", err);
             alert("Erro ao publicar preço: " + err.message);
         } finally {
-            publishButton.innerText = "PUBLISH PRICE";
+            publishButton.innerText = "PUBLICAR PREçO";
             publishButton.disabled = false;
         }
     });
