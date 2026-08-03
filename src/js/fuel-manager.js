@@ -35,9 +35,10 @@ function obterPrecoParaSupabase() {
 // ==========================================================================
 // 2. FUNÇÃO DE ENVIO PARA O SUPABASE (TABELA 'reports')
 // ==========================================================================
-export async function reportPriceByName(stationId, preco, tipoCombustivel) {
+export async function reportPriceByName(stationId, preco, tipoCombustivel, metodoPagamento = 1) {
     // Garantindo tipos de dados numéricos para o banco
     const fuelTypeInt = parseInt(tipoCombustivel, 10) || 1;
+    const paymentMethodInt = parseInt(metodoPagamento, 10) || 1;
 
     const { data, error } = await supabaseClient
         .from('reports') 
@@ -45,7 +46,8 @@ export async function reportPriceByName(stationId, preco, tipoCombustivel) {
             { 
                 price: preco,                 // numeric
                 fuel_type: fuelTypeInt,       // int2
-                station_id: stationId         // uuid (ou null se ainda não tiver vincular posto)
+                station_id: stationId,        // uuid
+                payment_method: paymentMethodInt // int2 (Adicionado para satisfazer a constraint NOT NULL)
             }
         ]);
 
@@ -142,7 +144,7 @@ if (publishButton) {
         }
 
         // UUID temporário de teste ou ID do posto retornado pela busca (tabela 'stations')
-        const dummyStationId = null; 
+        const dummyStationId = "2c89ee2e-af6e-4dc7-bb80-cde6a2ff5e82";
 
         publishButton.innerText = "SENDING...";
         publishButton.disabled = true;
@@ -166,4 +168,84 @@ if (publishButton) {
             publishButton.disabled = false;
         }
     });
+}
+
+function updatePriceTrend(oldPrice, newPrice) {
+    const trendElement = document.getElementById("price-trend-tool");
+    if (!trendElement) return; 
+
+    const diference = newPrice - oldPrice;
+    trendElement.classList.remove("up", "down");
+
+    if (diference > 0) {
+        trendElement.classList.add("up");
+        trendElement.innerText = `▲ +R$${diference.toFixed(2)} esta semana`;
+    } 
+    else if (diference < 0) { 
+        trendElement.classList.add("down");
+        trendElement.innerText = `▼ -R$${Math.abs(diference).toFixed(2)} esta semana`;
+    } 
+    else {
+        trendElement.innerText = ` R$${newPrice.toFixed(2)} sem alterações`;
+    }
+}
+
+function calcularTempoDecorrido(dataPostagem) {
+    const agora = new Date();
+    const postagem = new Date(dataPostagem);
+    
+    const diferencaMilissegundos = agora - postagem;
+    
+    const diferencaMinutos = Math.floor(diferencaMilissegundos / (1000 * 60));
+    const diferencaHoras = Math.floor(diferencaMilissegundos / (1000 * 60 * 60));
+    const diferencaDias = Math.floor(diferencaMilissegundos / (1000 * 60 * 60 * 24));
+
+    if (diferencaMinutos < 1) {
+        return "Atualizado agora mesmo";
+    } else if (diferencaMinutos < 60) {
+        return `Atualizado há ${diferencaMinutos} min`;
+    } else if (diferencaHoras < 24) {                                   
+        return `Atualizado há ${diferencaHoras} ${diferencaHoras === 1 ? 'hora' : 'horas'}`;
+    } else {
+        return `Atualizado há ${diferencaDias} ${diferencaDias === 1 ? 'dia' : 'dias'}`;
+    }
+}
+
+export async function carregarDadosDoBanco() {
+    try {
+        const { data: reports, error } = await supabaseClient
+            .from('reports')
+            .select('price, created_at')
+            .order('created_at', { ascending: false })
+            .limit(2);
+
+        if (error) throw error;
+
+        if (reports && reports.length > 0) {
+            const ultimoRegistro = reports[0];
+            const precoAtual = ultimoRegistro.price;
+            
+            // Tempo decorrido real
+            const elementoTempo = document.getElementById("lastUpdated");
+            if (elementoTempo) {
+                elementoTempo.innerText = calcularTempoDecorrido(ultimoRegistro.created_at);
+            }
+
+            // Cálculo da tendência
+            if (reports.length > 1) {
+                const precoAnterior = reports[1].price;
+                updatePriceTrend(precoAnterior, precoAtual);
+            } else {
+                updatePriceTrend(precoAtual, precoAtual);
+            }
+
+            // Atualização do preço exibido na tela principal
+            const elementoPrecoPrincipal = document.querySelector('.fuel-price');
+            if (elementoPrecoPrincipal) {
+                elementoPrecoPrincipal.innerText = `${precoAtual.toFixed(2).replace('.', ',')}`;
+            }
+        }
+    } catch (err) {
+        console.error("Erro ao carregar dados do Supabase:", err.message);
+    }
 }

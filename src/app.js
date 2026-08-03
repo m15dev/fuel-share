@@ -1,5 +1,6 @@
 import { supabaseClient } from './js/database.js';
 import { loginUser, logoutUser, getCurrentUser } from './js/auth.js';
+import { carregarDadosDoBanco } from './js/fuel-manager.js';
 
 // ==========================================================================
 // SISTEMA DE NAVEGAÇÃO (TROCA DE PÁGINAS)
@@ -10,11 +11,10 @@ const botaoValor = document.querySelector('.act2');
 const botaoMapa = document.querySelector('.act3');
 const botaoPerfil = document.querySelector('.profile-menu');
 
-
-botaoHome.addEventListener('click', () => trocarPagina('page-home'));
-botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
-botaoMapa.addEventListener('click', () => trocarPagina('page-mapa'));
-botaoPerfil.addEventListener('click', () => trocarPagina('page-perfil'));
+if (botaoHome) botaoHome.addEventListener('click', () => trocarPagina('page-home'));
+if (botaoValor) botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
+if (botaoMapa) botaoMapa.addEventListener('click', () => trocarPagina('page-mapa'));
+if (botaoPerfil) botaoPerfil.addEventListener('click', () => trocarPagina('page-perfil'));
 
 function trocarPagina(idDaPaginaAlvo) {
     const todasAsPaginas = document.querySelectorAll('.page');
@@ -27,26 +27,23 @@ function trocarPagina(idDaPaginaAlvo) {
         paginaAlvo.classList.add('active');
     }
 
-    // Remove o active dos botões da barra inferior
     const todosOsBotoes = document.querySelectorAll('.nav-bottom button');
     todosOsBotoes.forEach(botao => {
-        botao.removeAttribute('active'); //  Un activates the other menus 
+        botao.removeAttribute('active');
     });
     
-    // REMOVE O ACTIVE DO BOTÃO DE PERFIL TAMBÉM (Que está lá no Header)
     if (botaoPerfil) {
         botaoPerfil.removeAttribute('active');
     }
     
-    if (idDaPaginaAlvo === 'page-home') botaoHome.setAttribute('active', '');
-    if (idDaPaginaAlvo === 'page-valor') botaoValor.setAttribute('active', '');
-    if (idDaPaginaAlvo === 'page-mapa') botaoMapa.setAttribute('active', '');
-    if (idDaPaginaAlvo === 'page-perfil') botaoPerfil.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-home' && botaoHome) botaoHome.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-valor' && botaoValor) botaoValor.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-mapa' && botaoMapa) botaoMapa.setAttribute('active', '');
+    if (idDaPaginaAlvo === 'page-perfil' && botaoPerfil) botaoPerfil.setAttribute('active', '');
 }
 
-
 // ==========================================================================
-// ⌨️ NAVEGAÇÃO POR TECLADO (SETAS ESQUERDA E DIREITA) - VERSÃO ADAPTADA
+// NAVEGAÇÃO POR TECLADO
 // ==========================================================================
 
 const ordemPaginas = ['page-home', 'page-valor', 'page-mapa', 'page-perfil'];
@@ -56,7 +53,6 @@ window.addEventListener('keydown', (event) => {
     if (!paginaAtivaAtual) return;
 
     const idAtual = paginaAtivaAtual.id;
-    
     let indiceAtual = ordemPaginas.indexOf(idAtual);
 
     if (event.key === 'ArrowRight') {
@@ -102,9 +98,9 @@ window.forceUpdate = function() {
     window.location.reload();
 };
 
-//-----------------------------------------------------
-// Lógica de Preço (Up/Down) - 
-//-----------------------------------------------------
+// ==========================================================================
+// LÓGICA DE PREÇO & TEMPO
+// ==========================================================================
 function updatePriceTrend(oldPrice, newPrice) {
     const trendElement = document.getElementById("price-trend-tool");
     if (!trendElement) return; 
@@ -125,9 +121,6 @@ function updatePriceTrend(oldPrice, newPrice) {
     }
 }
 
-//-----------------------------------------------------
-// Codigo que cuida do tempo de postagem do fuel hero  
-//-----------------------------------------------------
 function calcularTempoDecorrido(dataPostagem) {
     const agora = new Date();
     const postagem = new Date(dataPostagem);
@@ -149,9 +142,6 @@ function calcularTempoDecorrido(dataPostagem) {
     }
 }
 
-// ==========================================================================
-// CONTROLE INTERACTIVE DE AUTENTICAÇÃO (SUPABASE)
-// ==========================================================================
 function updateAuthUI(user) {
     const loginContainer = document.getElementById('login-container');
     const profileLoggedContainer = document.getElementById('profile-logged-container');
@@ -172,48 +162,27 @@ function updateAuthUI(user) {
 }
 
 // ==========================================================================
-// 🏁 INICIALIZAÇÃO DO DOM
+// INICIALIZAÇÃO DO DOM
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // 1. Sistema de recepção dinâmica
     const nomeUsuario = "Mateus"; 
     const nameElement = document.getElementById("user-name");
     if (nameElement) nameElement.textContent = nomeUsuario; 
 
     const horaAtual = new Date().getHours();
-    let saudacao = "";
-
-    if (horaAtual >= 5 && horaAtual < 12) {
-        saudacao = "Bom dia";
-    } else if (horaAtual >= 12 && horaAtual < 18) {
-        saudacao = "Boa tarde";
-    } else {
-        saudacao = "Boa noite";
-    }
-
+    let saudacao = (horaAtual >= 5 && horaAtual < 12) ? "Bom dia" : (horaAtual >= 12 && horaAtual < 18) ? "Boa tarde" : "Boa noite";
+    
     const greetingElement = document.getElementById("greeting");
     if (greetingElement) greetingElement.textContent = saudacao;
 
-    // 2. Cidade do Usuário
-    const cidadeUsuario = "Pouso Alegre"; 
     const cityElement = document.getElementById("current-city");
-    if (cityElement) cityElement.textContent = cidadeUsuario; 
+    if (cityElement) cityElement.textContent = "Pouso Alegre"; 
 
-    // 3. Execução dos cálculos de tempo e tendências
-    const dataDBlast = "2026-07-01T22:45:00"; 
-    const elementoTempo = document.getElementById("lastUpdated");
-    if (elementoTempo) {
-        elementoTempo.innerText = calcularTempoDecorrido(dataDBlast);
-    }
+    // BUSCA OS DADOS DO SUPABASE
+    await carregarDadosDoBanco();
 
-    try {
-        updatePriceTrend(6.29, 6.49);
-    } catch (e) {
-        console.warn("Elemento de tendência não encontrado na view atual.");
-    }
-
-    // 5. Gatilho do Botão de Login
+    // LOGIN & SESSÃO
     const btnLoginTrigger = document.getElementById('btn-login-trigger');
     if (btnLoginTrigger) {
         btnLoginTrigger.addEventListener('click', async () => {
@@ -234,7 +203,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             try {
                 if (btnText) btnText.innerText = "CONECTANDO...";
                 const user = await loginUser(email, password);
-                console.log("Logado com sucesso!");
                 updateAuthUI(user);
             } catch (error) {
                 console.log("Erro ao entrar: " + error.message);
@@ -244,18 +212,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // 6. Verifica se o usuário já possui sessão salva no Supabase (Sem travar nada se não tiver)
     try {
         const user = await getCurrentUser();
         updateAuthUI(user);
     } catch (e) {
         console.log("Nenhum usuário logado inicialmente.");
-        console.log("Reconecte-se e tente novamente");
     }
 });
 
-
-// Monitoramento em tempo real do status de login
 supabaseClient.auth.onAuthStateChange((event, session) => {
     if (session) {
         updateAuthUI(session.user);
