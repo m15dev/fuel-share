@@ -105,9 +105,9 @@ navigator.geolocation.getCurrentPosition(async (position) => {
     } catch (error) {
         clearTimeout(timeoutId);
         if (error.name === 'AbortError') {
-            console.warn("⚠️ O servidor da Overpass demorou demais para responder (Timeout de 6s).");
+            console.warn(" O servidor da Overpass demorou demais para responder (Timeout de 6s).");
         } else {
-            console.error("❌ Erro ao buscar postos:", error.message);
+            console.error(" Erro ao buscar postos:", error.message);
         }
     }
 }, (geoError) => {
