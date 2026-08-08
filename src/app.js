@@ -9,7 +9,7 @@ import { carregarDadosDoBanco } from './js/fuel-manager.js';
 const botaoHome = document.querySelector('.act1');
 const botaoValor = document.querySelector('.act2');
 const botaoMapa = document.querySelector('.act3');
-const botaoPerfil = document.querySelector('.profile-menu');
+const botaoPerfil = document.querySelector('.profile-menu-button');
 
 if (botaoHome) botaoHome.addEventListener('click', () => trocarPagina('page-home'));
 if (botaoValor) botaoValor.addEventListener('click', () => trocarPagina('page-valor'));
@@ -226,4 +226,4 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
     } else {
         updateAuthUI(null);
     }
-});
+}); 
