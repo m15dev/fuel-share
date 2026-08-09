@@ -47,7 +47,7 @@ export async function reportPriceByName(stationId, preco, tipoCombustivel, metod
                 price: preco,                 // numeric
                 fuel_type: fuelTypeInt,       // int2
                 station_id: stationId,        // uuid
-                payment_method: paymentMethodInt // int2 (Adicionado para satisfazer a constraint NOT NULL)
+                payment_method: paymentMethodInt // int2
             }
         ]);
 
@@ -153,6 +153,9 @@ if (publishButton) {
             await reportPriceByName(dummyStationId, numericPrice, selectedFuelType);
             console.log("Price successfully published in real-time!");
             
+            // 🔄 RECARREGA OS DADOS DO BANCO PARA ATUALIZAR A HOME IMEDIATAMENTE
+            await carregarDadosDoBanco();
+
             document.getElementById("fuel-price-input").value = "";
             fuelCards.forEach(c => c.style.border = 'none');
             selectedFuelType = null;
@@ -249,3 +252,22 @@ export async function carregarDadosDoBanco() {
         console.error("Erro ao carregar dados do Supabase:", err.message);
     }
 }
+
+
+// ==========================================================================
+// 5. ESCUTA EM TEMPO REAL DO SUPABASE (REALTIME)
+// ==========================================================================
+// Toda vez que um usuário inserir um preço na tabela 'reports',
+// este evento é disparado e atualiza a tela dos outros clients.
+
+supabaseClient
+    .channel('reports-realtime-channel')
+    .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'reports' },
+        (payload) => {
+            console.log('Novo preço registrado por outro usuário! Atualizando tela...', payload);
+            carregarDadosDoBanco(); // Atualiza os cards na hora para todo mundo
+        }
+    )
+    .subscribe();
