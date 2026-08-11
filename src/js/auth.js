@@ -12,6 +12,7 @@ export async function loginUser(email, password) {
 
     if (error) {
         throw error;
+        alert("Please, Login With and valid account, and try again.");
     }
     return data.user;
 }
