@@ -36,7 +36,6 @@ function obterPrecoParaSupabase() {
 // 2. FUNÇÃO DE ENVIO PARA O SUPABASE (TABELA 'reports')
 // ==========================================================================
 export async function reportPriceByName(stationId, preco, tipoCombustivel, metodoPagamento = 1) {
-    // Garantindo tipos de dados numéricos para o banco
     const fuelTypeInt = parseInt(tipoCombustivel, 10) || 1;
     const paymentMethodInt = parseInt(metodoPagamento, 10) || 1;
 
@@ -46,7 +45,7 @@ export async function reportPriceByName(stationId, preco, tipoCombustivel, metod
             { 
                 price: preco,                 // numeric
                 fuel_type: fuelTypeInt,       // int2
-                station_id: stationId,        // uuid
+                station_id: stationId,        // uuid ou id do posto
                 payment_method: paymentMethodInt // int2
             }
         ]);
@@ -59,60 +58,139 @@ export async function reportPriceByName(stationId, preco, tipoCombustivel, metod
 }
 
 // ==========================================================================
-// 3. GEOLOCALIZAÇÃO + OVERPASS API
+// 3. GEOLOCALIZAÇÃO & POSTOS MAIS PRÓXIMOS (HAVERSINE + OVERPASS)
 // ==========================================================================
-navigator.geolocation.getCurrentPosition(async (position) => {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+let postosProximos = [];
+let postoSelecionadoId = null;
 
-    console.log(`Location: ${lat}, ${lon}`);
+// Formula de Haversine para calcular distancia em KM
+function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
 
-    const query = `
-        [out:json][timeout:15];
-        (
-            node["amenity"="fuel"](around:10000,${lat},${lon});
-            way["amenity"="fuel"](around:10000,${lat},${lon});
-            relation["amenity"="fuel"](around:10000,${lat},${lon});
-        );
-        out center;
-    `;
+export function buscarPostosProximos() {
+    if (!navigator.geolocation) {
+        console.error("Geolocalização não é suportada por este dispositivo.");
+        return;
+    }
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const userLat = position.coords.latitude;
+        const userLon = position.coords.longitude;
 
-    try {
-        const response = await fetch("https://overpass-api.de/api/interpreter", {
-            method: "POST",
-            body: query,
-            signal: controller.signal
+        console.log(`User Lat/Lon: ${userLat}, ${userLon}`);
+
+        const query = `
+            [out:json][timeout:15];
+            (
+                node["amenity"="fuel"](around:10000,${userLat},${userLon});
+                way["amenity"="fuel"](around:10000,${userLat},${userLon});
+            );
+            out center;
+        `;
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+        try {
+            const response = await fetch("https://overpass-api.de/api/interpreter", {
+                method: "POST",
+                body: query,
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error(`Erro Overpass API (Status ${response.status})`);
+            }
+
+            const data = await response.json();
+
+            if (data && data.elements) {
+                // Mapeia e calcula a distância para cada posto encontrado
+                postosProximos = data.elements.map(station => {
+                    const stLat = station.lat || (station.center && station.center.lat);
+                    const stLon = station.lon || (station.center && station.center.lon);
+                    const nome = station.tags.name || station.tags.brand || "Posto sem Nome";
+                    const distancia = calcularDistanciaKm(userLat, userLon, stLat, stLon);
+
+                    return {
+                        id: station.id,
+                        nome: nome,
+                        distancia: distancia,
+                        lat: stLat,
+                        lon: stLon
+                    };
+                });
+
+                // Ordena do mais próximo para o mais distante
+                postosProximos.sort((a, b) => a.distancia - b.distancia);
+
+                // Renderiza na interface
+                renderizarListaPostos(postosProximos);
+            }
+
+        } catch (error) {
+            clearTimeout(timeoutId);
+            if (error.name === 'AbortError') {
+                console.warn("Timeout de 6s atingido na busca de postos.");
+            } else {
+                console.error("Erro ao carregar postos:", error.message);
+            }
+        }
+    }, (geoError) => {
+        console.error("Erro na Geolocalização:", geoError);
+    });
+}
+
+function renderizarListaPostos(listaPostos) {
+    const container = document.getElementById("lista-postos-container");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    // Exibe os 5 postos mais próximos
+    const topPostos = listaPostos.slice(0, 5);
+
+    topPostos.forEach(posto => {
+        const card = document.createElement("div");
+        card.className = "station-card";
+
+        const textoDistancia = posto.distancia < 1 
+            ? `${Math.round(posto.distancia * 1000)}m` 
+            : `${posto.distancia.toFixed(1)} km`;
+
+        card.innerHTML = `
+            <div class="station-info">
+                <strong>${posto.nome}</strong>
+                <small>📍 a ${textoDistancia} de você</small>
+            </div>
+        `;
+
+        card.addEventListener("click", () => {
+            document.querySelectorAll(".station-card").forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+            postoSelecionadoId = posto.id;
+            console.log("Posto selecionado:", posto.nome, posto.id);
         });
 
-        clearTimeout(timeoutId);
+        container.appendChild(card);
+    });
+}
 
-        if (!response.ok) {
-            throw new Error(`Erro no servidor de postos (Status ${response.status})`);
-        }
-
-        const data = await response.json();
-
-        if (data && data.elements) {
-            data.elements.forEach((station) => {
-                const name = station.tags.name || "Posto sem Nome";
-                console.log(`Station Name: ${name}`);
-            });
-        }
-
-    } catch (error) {
-        clearTimeout(timeoutId);
-        if (error.name === 'AbortError') {
-            console.warn(" O servidor da Overpass demorou demais para responder (Timeout de 6s).");
-        } else {
-            console.error(" Erro ao buscar postos:", error.message);
-        }
-    }
-}, (geoError) => {
-    console.error("Erro ao obter geolocalização do dispositivo:", geoError);
-});
+// Inicializa a busca de postos ao carregar a aplicação
+buscarPostosProximos();
 
 // ==========================================================================
 // 4. LÓGICA DE SELEÇÃO E SUBMISSÃO DE PREÇO
@@ -143,19 +221,20 @@ if (publishButton) {
             return;
         }
 
-        // UUID temporário de teste ou ID do posto retornado pela busca (tabela 'stations')
-        const dummyStationId = "2c89ee2e-af6e-4dc7-bb80-cde6a2ff5e82";
+        // Usa o posto selecionado pelo usuário ou o fallback/dummy
+        const targetStationId = postoSelecionadoId || "2c89ee2e-af6e-4dc7-bb80-cde6a2ff5e82";
 
         publishButton.innerText = "SENDING...";
         publishButton.disabled = true;
 
         try {
-            await reportPriceByName(dummyStationId, numericPrice, selectedFuelType);
+            await reportPriceByName(targetStationId, numericPrice, selectedFuelType);
             console.log("Price successfully published in real-time!");
             
-            // 🔄 RECARREGA OS DADOS DO BANCO PARA ATUALIZAR A HOME IMEDIATAMENTE
+            // Recarrega os dados do banco para o usuário atual
             await carregarDadosDoBanco();
 
+            // Reseta o formulário
             document.getElementById("fuel-price-input").value = "";
             fuelCards.forEach(c => c.style.border = 'none');
             selectedFuelType = null;
@@ -253,13 +332,9 @@ export async function carregarDadosDoBanco() {
     }
 }
 
-
 // ==========================================================================
 // 5. ESCUTA EM TEMPO REAL DO SUPABASE (REALTIME)
 // ==========================================================================
-// Toda vez que um usuário inserir um preço na tabela 'reports',
-// este evento é disparado e atualiza a tela dos outros clients.
-
 supabaseClient
     .channel('reports-realtime-channel')
     .on(
@@ -267,7 +342,7 @@ supabaseClient
         { event: 'INSERT', schema: 'public', table: 'reports' },
         (payload) => {
             console.log('Novo preço registrado por outro usuário! Atualizando tela...', payload);
-            carregarDadosDoBanco(); // Atualiza os cards na hora para todo mundo
+            carregarDadosDoBanco();
         }
     )
     .subscribe();
