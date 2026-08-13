@@ -49,19 +49,69 @@
 
 .splash1 { color: rgb(4, 163, 4); }
 
+
 .nav-bottom {
-    position: fixed; 
-    bottom: 0;         
-    left: 0;          
-    width: 100%;
-    padding: 12px 20px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--fixed-box);
-    border-top: 1px solid var(--border); 
-    z-index: 9999;     
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  
+  height: 45px; 
+  background-color: #121214;
+  
+  overflow: visible; 
+  
+  /* Distribui os botões de forma mais espaçada e uniforme */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  padding: 0 clamp(15px, 5vw, 40px); 
+  box-sizing: border-box;
+  
+  border-top: 1px solid #29292e;
+  z-index: 1000;
 }
+
+/* Estilo geral dos botões */
+.nav-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  
+  /* Move o botão um pouco para cima para que ele suba da barra */
+  transform: translateY(-10px); 
+}
+
+/* Caixa reservada para os ícones de 50px */
+.nav-btn .icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  /* Fundo para dar destaque ao ícone vazado (opcional) */
+  background-color: #1a1a1e; 
+  border-radius: 15%;
+  border: 1px solid #29292e;
+}
+
+/* Rótulo de texto abaixo do ícone */
+.nav-btn .label {
+  font-size: 11px;
+  color: #8d8d99;
+  font-family: sans-serif;
+  margin-top: 2px;
+}
+
+
+
 
 .subtitulo { 
     color: #888888; 
@@ -83,3 +133,4 @@
     flex-shrink: 0; 
     font-size: 12px;
 }
+
