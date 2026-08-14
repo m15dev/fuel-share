@@ -73,6 +73,7 @@
 }
 
 /* Estilo geral dos botões */
+/* Botão principal */
 .nav-btn {
   background: transparent;
   border: none;
@@ -83,11 +84,22 @@
   cursor: pointer;
   padding: 0;
   
-  /* Move o botão um pouco para cima para que ele suba da barra */
-  transform: translateY(-10px); 
+  /* Posicionamento original */
+  transform: translateY(-10px) scale(1); 
+  
+  /* Transição suave */
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Remove o brilho/destaque padrão ao tocar no celular */
+  -webkit-tap-highlight-color: transparent; 
 }
 
-/* Caixa reservada para os ícones de 50px */
+/* Quando qualquer parte do botão é clicada/tocada */
+.nav-btn:active {
+  transform: translateY(-10px) scale(0.88); 
+}
+
+/* Área do Ícone */
 .nav-btn .icon {
   width: 50px;
   height: 50px;
@@ -95,22 +107,25 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  
-  /* Fundo para dar destaque ao ícone vazado (opcional) */
   background-color: #1a1a1e; 
-  border-radius: 15%;
+  border-radius: 25%;
   border: 1px solid #29292e;
+  
+  /* O SEGREDO: Ignora o clique no elemento filho e envia pro botão */
+  pointer-events: none; 
 }
 
-/* Rótulo de texto abaixo do ícone */
+/* Texto abaixo do ícone */
 .nav-btn .label {
   font-size: 11px;
   color: #8d8d99;
   font-family: sans-serif;
   margin-top: 2px;
+  
+  /* O SEGREDO: Garante que clicar no texto acione o botão pai */
+  pointer-events: none; 
+  user-select: none; /* Evita que o texto fique selecionado/azulado ao clicar rápido */
 }
-
-
 
 
 .subtitulo { 
